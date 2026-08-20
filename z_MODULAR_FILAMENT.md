@@ -78,6 +78,8 @@ Jika Anda tertarik, saya bisa buatkan contoh implementasi menggunakan Filament P
 [2] [https://github.com](https://github.com/liberusoftware/boilerplate-laravel)
 [3] [https://filamentphp.com](https://filamentphp.com/plugins/oriondevelops-greeter)
 
+---
+##
 
 Membuat Filament Plugin untuk setiap modul adalah pendekatan terbaik (paling bersih dan modular). Dengan cara ini, setiap modul bertanggung jawab penuh atas komponen Filament-nya sendiri, sehingga Anda tidak perlu mengubah file AdminPanelProvider.php utama setiap kali menambah modul baru. [1] 
 Berikut adalah langkah-langkah membuat Filament Plugin untuk setiap modul nwidart:
@@ -186,6 +188,8 @@ Apakah Anda ingin saya buatkan contoh perintah Custom Artisan Command agar Anda 
 [1] [https://github.com](https://github.com/savannabits/filament-modules)
 [2] [https://packagist.org](https://packagist.org/packages/juniyasyos/filament-media-manager)
 
+---
+##
 
 Berikut adalah contoh pembuatan Custom Artisan Command di Laravel untuk mengotomatisasi pembuatan struktur folder Filament beserta file Plugin-nya di dalam modul nwidart.
 ## 1. Buat Command Baru
@@ -331,6 +335,9 @@ Jika Anda ingin melangkah lebih jauh, saya bisa tunjukkan cara membuat Custom Ar
 
 [1] [https://filamentphp.com](https://filamentphp.com/plugins/coolsam-modules)
 
+---
+##
+
 Ya, Anda tentu saja bisa melewati sistem authentication agar Filament Panel dapat diakses langsung tanpa login. Pendekatan ini sangat umum digunakan ketika panel Filament hanya berfungsi sebagai mockup, purwarupa (prototype), atau presentasi desain UI/UX kepada klien. [1] 
 Untuk menonaktifkan login pada Filament Panel, Anda memiliki dua cara utama. Pilih salah satu yang paling sesuai dengan kebutuhan proyek Anda:
 ## Cara 1: Mengosongkan Middleware auth (Cara Paling Mudah)
@@ -407,3 +414,94 @@ Apakah Anda ingin dibantu untuk membuat Custom Page khusus di dalam modul yang b
 [5] [https://fr.wordpress.org](https://fr.wordpress.org/plugins/controlled-admin-access/)
 [6] [https://security.stackexchange.com](https://security.stackexchange.com/questions/42246/should-i-know-my-users-passwords-so-i-can-check-they-can-logon)
 [7] [https://filamentphp.com](https://filamentphp.com/plugins/mortezaashrafi-shield-captcha)
+
+---
+##
+
+Berikut adalah cara membuat Custom Page di dalam modul yang sepenuhnya independen dari database. Halaman ini sangat cocok untuk menyajikan presentasi UI/UX, mockup statis, atau menyematkan (embed) prototipe interaktif seperti Figma.
+Mari kita asumsikan kita akan membuat halaman bernama PreviewDesain di dalam modul Karyawan.
+## 1. Buat File Class Page (PHP)
+Buat file class PHP baru secara manual di dalam folder modul Anda.
+Buat file di: Modules/Karyawan/Filament/Pages/PreviewDesain.php
+
+```php
+<?php
+
+namespace Modules\Karyawan\Filament\Pages;
+
+use Filament\Pages\Page;
+
+class PreviewDesain extends Page
+{
+    // Icon yang akan muncul di sidebar navigation
+    protected static ?string $navigationIcon = 'heroicon-o-presentation-chart-line';
+
+    // Judul halaman di sidebar dan header
+    protected static ?string $title = 'UI/UX Preview';
+
+    // Kelompok menu di sidebar (opsional)
+    protected static ?string $navigationGroup = 'Design Prototype';
+
+    // Menentukan file Blade view yang akan digunakan
+    protected static string $view = 'karyawan::filament.pages.preview-desain';
+
+    // Menghilangkan fungsi otorisasi agar halaman selalu bisa diakses
+    public static function canAccess(): bool
+    {
+        return true;
+    }
+}
+```
+## 2. Buat File Tampilan (Blade View)
+Nwidart Modules menggunakan sistem penamaan view berbasis modul (menggunakan tanda ::). Buat file baru untuk mendesain tampilan UI/UX Anda.
+Buat file di: Modules/Karyawan/Resources/views/filament/pages/preview-desain.blade.php
+Di dalam file ini, Anda bebas menggunakan komponen bawaan Filament, layouting Tailwind CSS, atau menggunakan ```<iframe>``` untuk menampilkan desain dari Figma/Adobe XD:
+
+```php
+<x-filament-panels::page>
+    <div class="space-y-6">
+        <!-- Bagian Informasi Pengantar -->
+        <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
+            <h2 class="text-xl font-bold text-gray-800 dark:text-white">🚀 Prototipe Desain Aplikasi Karyawan</h2>
+            <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                Halaman ini menyajikan pratinjau langsung dari tim UI/UX. Anda dapat berinteraksi langsung dengan rancangan aplikasi di bawah ini sebelum fitur ini masuk ke tahap pengembangan database.
+            </p>
+        </div>
+
+        <!-- Opsi A: Menyematkan Live Embed Figma (Sangat Direkomendasikan untuk UI/UX) -->
+        <div class="overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 flex justify-between items-center">
+                <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Figma Live Prototype</span>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">Interactive</span>
+            </div>
+            
+            <!-- Ganti URL src di bawah dengan link embed Figma Anda -->
+            <iframe 
+                style="border: 1px solid rgba(0, 0, 0, 0.1);" 
+                width="100%" 
+                height="600" 
+                src="https://figma.com" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- Opsi B: Menggunakan Grid untuk Dummy Statis / Gambar Screenshot Desain -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="p-4 bg-white rounded-xl border border-gray-100 shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                <h3 class="font-semibold text-gray-700 dark:text-gray-300 mb-3">Tampilan Dashboard Mobile</h3>
+                <img src="https://unsplash.com" alt="Mockup Mobile" class="w-full h-auto rounded-lg border">
+            </div>
+
+            <div class="p-4 bg-white rounded-xl border border-gray-100 shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                <h3 class="font-semibold text-gray-700 dark:text-gray-300 mb-3">Skema Alur Kerja (Workflow)</h3>
+                <img src="https://unsplash.com" alt="Workflow" class="w-full h-auto rounded-lg border">
+            </div>
+        </div>
+    </div>
+</x-filament-panels::page>
+```
+## 3. Selesai!
+Buka Filament Panel Anda di peramban (/admin/preview-desain). Berkat konfigurasi otomatisasi Plugin yang sudah kita bahas sebelumnya, Filament akan mendeteksi halaman baru ini secara instan.
+Halaman ini akan muncul di sidebar kiri, dapat diakses tanpa perlu login (jika Anda menerapkan trik bebas login sebelumnya), dan tidak akan memicu error database apa pun karena kodenya murni statis untuk keperluan demo UI/UX.
+Jika Anda ingin melanjutkan, beri tahu saya jika Anda perlu bantuan untuk menyematkan komponen input UI statis (seperti tombol tiruan, form simulasi, atau tabel buatan) menggunakan komponen bawaan Blade milik Filament agar halaman terasa lebih hidup. Bagaimana menurut Anda?
+
