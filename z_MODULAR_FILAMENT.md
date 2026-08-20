@@ -3,8 +3,9 @@ Berikut adalah langkah-langkah praktis untuk melakukannya:
 ## 1. Buat Modul Baru (Jika belum ada)
 Jika Anda belum memiliki modul, buatlah terlebih dahulu melalui terminal:
 
+```php
 php artisan module:make Karyawan
-
+```
 ## 2. Daftarkan Modul di Filament Panel Provider
 Buka file Panel Provider Filament Anda (biasanya berada di app/Providers/Filament/AdminPanelProvider.php). Gunakan method discover... milik Filament untuk membaca Resource, Pages, dan Widgets yang ada di dalam modul Anda. [1, 2] 
 Ubah file AdminPanelProvider.php menjadi seperti ini: [3] 
@@ -395,7 +396,7 @@ Catatan: Pastikan Anda sudah menjalankan seeder untuk membuat minimal 1 user di 
 Jika Anda hanya ingin menampilkan visual tanpa interaksi database yang rumit:
 
    1. Gunakan Custom Pages: Daripada membuat Resource (yang memaksa Anda membuat Model & Database), buatlah Custom Page Filament di dalam modul Anda menggunakan perintah php artisan make:filament-page NamaHalaman.
-   2. Di dalam file Blade custom page tersebut (.blade.php), Anda bebas memasukkan kode HTML/CSS, komponen Tailwind, atau bahkan menyematkan (embed) link Figma Prototype menggunakan <iframe>.
+   2. Di dalam file Blade custom page tersebut (.blade.php), Anda bebas memasukkan kode HTML/CSS, komponen Tailwind, atau bahkan menyematkan (embed) link Figma Prototype menggunakan ```<iframe>```.
 
 Apakah Anda ingin dibantu untuk membuat Custom Page khusus di dalam modul yang bisa langsung menampilkan desain UI/UX tanpa bergantung pada database sama sekali?
 
