@@ -1,0 +1,11 @@
+{
+    "name": "Contents",
+    "alias": "contents",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Contents\\Providers\\ContentsServiceProvider"
+    ],
+    "files": []
+}

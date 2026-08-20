@@ -1,0 +1,12 @@
+{
+    "Admin": true,
+    "Data": true,
+    "Media": true,
+    "Page": true,
+    "Comments": true,
+    "Public": true,
+    "Users": true,
+    "Settings": true,
+    "Contents": true,
+    "Pages": true
+}
