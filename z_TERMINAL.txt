@@ -59,3 +59,17 @@ Route::prefix('admin/data')->group(function () {
 
 
 php artisan route:list
+
+https://demo.tailadmin.com/
+https://flowbite.com/
+https://flowbite.com/application-ui/demo/
+https://hyperui.dev/
+https://ui.shadcn.com/
+
+Filament menggunakan kombinasi Tailwind CSS + Alpine.js + Livewire + Charts.js
+membuat Filament sangat cepat, responsif, dan
+mudah dikustomisasi langsung dari kode PHP backend Anda
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.16.2/dist/cdn.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
