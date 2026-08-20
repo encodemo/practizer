@@ -1,2 +1,2 @@
-# practicer
+# Practizer
 Laravel Filament Full Course
