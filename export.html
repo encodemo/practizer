@@ -1,0 +1,4971 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Export Manager</title>
+
+<style>
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #eff6ff;
+
+    --success: #16a34a;
+    --success-light: #f0fdf4;
+
+    --purple: #7c3aed;
+    --purple-light: #f5f3ff;
+
+    --warning: #d97706;
+    --warning-light: #fffbeb;
+
+    --danger: #dc2626;
+
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --bg: #f8fafc;
+    --white: #ffffff;
+
+    --radius: 10px;
+
+    --shadow:
+        0 2px 8px rgba(15, 23, 42, .06);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.topbar {
+    height: 64px;
+
+    background: white;
+
+    border-bottom:
+        1px solid var(--border);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 28px;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 9px;
+
+    background: var(--primary);
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 800;
+}
+
+.brand-title {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.brand-subtitle {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page {
+    max-width: 1500px;
+    margin: auto;
+    padding: 28px;
+}
+
+.page-header {
+    margin-bottom: 22px;
+}
+
+.page-header h1 {
+    margin: 0 0 5px;
+    font-size: 25px;
+}
+
+.page-header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   STEP
+========================================================= */
+
+.steps {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+    overflow-x: auto;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.step-number {
+    width: 28px;
+    height: 28px;
+
+    border-radius: 50%;
+
+    background: #e2e8f0;
+    color: var(--muted);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.step.active .step-number {
+    background: var(--primary);
+    color: white;
+}
+
+.step-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.step.active .step-label {
+    color: var(--primary);
+}
+
+.step-line {
+    width: 50px;
+    height: 1px;
+
+    background: var(--border);
+
+    margin: 0 10px;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card {
+    background: white;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+
+    margin-bottom: 20px;
+}
+
+.card-header {
+    padding: 17px 20px;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+.card-title {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.card-description {
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+
+/* =========================================================
+   TABLE SELECTOR
+========================================================= */
+
+.table-selector {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 14px;
+}
+
+.table-option {
+    position: relative;
+}
+
+.table-option input {
+    position: absolute;
+    opacity: 0;
+}
+
+.table-option label {
+    display: block;
+
+    padding: 17px;
+
+    border:
+        2px solid var(--border);
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.table-option label:hover {
+    border-color: #93c5fd;
+}
+
+.table-option input:checked + label {
+    border-color: var(--primary);
+    background: var(--primary-light);
+}
+
+.table-name {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.table-icon {
+    width: 31px;
+    height: 31px;
+
+    border-radius: 7px;
+
+    background: #dbeafe;
+    color: var(--primary);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.table-description {
+    margin-top: 9px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+.table-count {
+    margin-top: 9px;
+
+    color: var(--primary);
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   PERIOD TYPE
+========================================================= */
+
+.period-types {
+    display: grid;
+
+    grid-template-columns:
+        repeat(6, 1fr);
+
+    gap: 9px;
+
+    margin-bottom: 18px;
+}
+
+.period-option {
+    position: relative;
+}
+
+.period-option input {
+    position: absolute;
+    opacity: 0;
+}
+
+.period-option label {
+    min-height: 72px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    text-align: center;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    transition: .2s;
+}
+
+.period-option label:hover {
+    border-color: #93c5fd;
+}
+
+.period-option input:checked + label {
+    border:
+        2px solid var(--primary);
+
+    background:
+        var(--primary-light);
+
+    color:
+        var(--primary);
+}
+
+.period-icon {
+    font-size: 19px;
+}
+
+
+/* =========================================================
+   PERIOD PANEL
+========================================================= */
+
+.period-panel {
+    border:
+        1px solid var(--border);
+
+    background:
+        #f8fafc;
+
+    border-radius:
+        8px;
+
+    padding:
+        18px;
+}
+
+.period-panel-title {
+    font-size: 13px;
+    font-weight: 700;
+
+    margin-bottom: 4px;
+}
+
+.period-panel-description {
+    color: var(--muted);
+
+    font-size: 10px;
+
+    margin-bottom: 16px;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 13px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-label {
+    font-size: 10px;
+    font-weight: 700;
+
+    color: var(--muted);
+}
+
+.form-control {
+    width: 100%;
+
+    padding:
+        9px 11px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        6px;
+
+    background:
+        white;
+
+    font-size:
+        12px;
+
+    outline:
+        none;
+}
+
+.form-control:focus {
+    border-color:
+        var(--primary);
+}
+
+
+/* =========================================================
+   MULTI SELECT YEAR / MONTH
+========================================================= */
+
+.multi-select-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 9px;
+}
+
+.multi-select-title {
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.mini-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.mini-button {
+    padding:
+        5px 8px;
+
+    border:
+        1px solid var(--border);
+
+    background:
+        white;
+
+    border-radius:
+        5px;
+
+    font-size:
+        9px;
+
+    cursor:
+        pointer;
+}
+
+.mini-button:hover {
+    background: #f1f5f9;
+}
+
+
+/* YEAR GRID */
+
+.year-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(8, 1fr);
+
+    gap: 7px;
+}
+
+.period-check {
+    position: relative;
+}
+
+.period-check input {
+    position: absolute;
+    opacity: 0;
+}
+
+.period-check label {
+    min-height:
+        37px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border:
+        1px solid var(--border);
+
+    background:
+        white;
+
+    border-radius:
+        6px;
+
+    cursor:
+        pointer;
+
+    font-size:
+        10px;
+
+    font-weight:
+        600;
+}
+
+.period-check label:hover {
+    border-color:
+        #93c5fd;
+}
+
+.period-check input:checked + label {
+    border:
+        2px solid var(--primary);
+
+    background:
+        var(--primary-light);
+
+    color:
+        var(--primary);
+}
+
+
+/* MONTH GRID */
+
+.month-grid {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap:
+        8px;
+}
+
+.month-grid .period-check label {
+    min-height:
+        42px;
+}
+
+
+/* QUARTER / SEMESTER */
+
+.period-grid-small {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap:
+        9px;
+}
+
+.period-grid-small .period-check label {
+    min-height:
+        50px;
+
+    flex-direction:
+        column;
+
+    gap:
+        2px;
+}
+
+
+/* =========================================================
+   GROUPING
+========================================================= */
+
+.grouping-panel {
+    margin-top:
+        18px;
+
+    padding:
+        13px 15px;
+
+    background:
+        white;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        7px;
+}
+
+.grouping-title {
+    font-size:
+        11px;
+
+    font-weight:
+        700;
+
+    margin-bottom:
+        10px;
+}
+
+.radio-row {
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        8px;
+}
+
+.radio-option {
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        5px;
+
+    padding:
+        7px 10px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        6px;
+
+    cursor:
+        pointer;
+
+    font-size:
+        10px;
+}
+
+.radio-option input {
+    accent-color:
+        var(--primary);
+}
+
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.info-box {
+    margin-top:
+        13px;
+
+    padding:
+        10px 12px;
+
+    border:
+        1px solid #bfdbfe;
+
+    background:
+        var(--primary-light);
+
+    color:
+        #1e40af;
+
+    border-radius:
+        6px;
+
+    font-size:
+        10px;
+
+    line-height:
+        1.5;
+}
+
+
+/* =========================================================
+   DATE FIELDS
+========================================================= */
+
+.date-fields {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        12px;
+
+    margin-top:
+        18px;
+}
+
+.date-field-card {
+    background:
+        white;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        8px;
+
+    padding:
+        13px;
+}
+
+.date-field-header {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    margin-bottom:
+        9px;
+}
+
+.date-field-icon {
+    width:
+        28px;
+
+    height:
+        28px;
+
+    border-radius:
+        6px;
+
+    background:
+        #fef3c7;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+}
+
+
+/* =========================================================
+   RELATIONSHIP
+========================================================= */
+
+.relationship-list {
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        7px;
+}
+
+.relationship-item {
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+
+    padding:
+        6px 9px;
+
+    background:
+        white;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        6px;
+
+    font-size:
+        10px;
+}
+
+.relationship-arrow {
+    color:
+        var(--primary);
+
+    font-weight:
+        800;
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.summary-bar {
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        8px;
+
+    margin-bottom:
+        15px;
+}
+
+.summary-item {
+    padding:
+        6px 10px;
+
+    background:
+        white;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        6px;
+
+    font-size:
+        10px;
+}
+
+.summary-item strong {
+    color:
+        var(--primary);
+}
+
+
+/* =========================================================
+   COLUMN GRID
+========================================================= */
+
+.column-grid {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, minmax(280px, 1fr));
+
+    gap:
+        17px;
+}
+
+.column-card {
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        9px;
+
+    background:
+        white;
+
+    overflow:
+        hidden;
+}
+
+.column-card-header {
+    padding:
+        13px 15px;
+
+    background:
+        #f8fafc;
+
+    border-bottom:
+        1px solid var(--border);
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+}
+
+.column-card-title {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+}
+
+.column-card-count {
+    margin-top:
+        3px;
+
+    color:
+        var(--muted);
+
+    font-size:
+        9px;
+}
+
+.column-actions {
+    display:
+        flex;
+
+    gap:
+        4px;
+}
+
+.small-button {
+    padding:
+        5px 7px;
+
+    background:
+        white;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        5px;
+
+    font-size:
+        9px;
+
+    cursor:
+        pointer;
+}
+
+.search-box {
+    padding:
+        9px;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+.search-box input {
+    width:
+        100%;
+
+    padding:
+        7px 9px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        5px;
+
+    outline:
+        none;
+
+    font-size:
+        10px;
+}
+
+.column-list {
+    max-height:
+        500px;
+
+    overflow-y:
+        auto;
+
+    padding:
+        7px;
+}
+
+.column-item {
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    gap:
+        8px;
+
+    padding:
+        8px;
+
+    border-radius:
+        6px;
+
+    cursor:
+        pointer;
+}
+
+.column-item:hover {
+    background:
+        #f8fafc;
+}
+
+.column-item input {
+    margin-top:
+        2px;
+
+    accent-color:
+        var(--primary);
+}
+
+.column-name {
+    font-size:
+        10px;
+
+    font-weight:
+        600;
+
+    word-break:
+        break-word;
+}
+
+.column-meta {
+    margin-top:
+        4px;
+
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        4px;
+}
+
+.badge {
+    padding:
+        2px 5px;
+
+    border-radius:
+        4px;
+
+    font-size:
+        8px;
+
+    font-weight:
+        700;
+}
+
+.badge-key {
+    background:
+        #dcfce7;
+
+    color:
+        #15803d;
+}
+
+.badge-cross {
+    background:
+        #ede9fe;
+
+    color:
+        #6d28d9;
+}
+
+.badge-date {
+    background:
+        #fef3c7;
+
+    color:
+        #92400e;
+}
+
+
+/* =========================================================
+   GROUPING PREVIEW
+========================================================= */
+
+.group-preview {
+    margin-top:
+        15px;
+
+    padding:
+        14px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        8px;
+
+    background:
+        white;
+}
+
+.group-preview-title {
+    font-size:
+        11px;
+
+    font-weight:
+        700;
+
+    margin-bottom:
+        10px;
+}
+
+.group-tree {
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        4px;
+}
+
+.group-node {
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        6px;
+
+    overflow:
+        hidden;
+}
+
+.group-node-header {
+    padding:
+        8px 10px;
+
+    background:
+        #f8fafc;
+
+    font-size:
+        10px;
+
+    font-weight:
+        700;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+}
+
+.group-node-body {
+    padding:
+        7px 10px;
+
+    font-size:
+        9px;
+
+    color:
+        var(--muted);
+
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        5px;
+}
+
+.group-table-badge {
+    padding:
+        3px 6px;
+
+    background:
+        var(--primary-light);
+
+    color:
+        var(--primary);
+
+    border-radius:
+        4px;
+}
+
+
+/* =========================================================
+   PREVIEW JSON
+========================================================= */
+
+.preview {
+    background:
+        #0f172a;
+
+    color:
+        #e2e8f0;
+
+    border-radius:
+        8px;
+
+    padding:
+        17px;
+
+    overflow:
+        auto;
+}
+
+.preview pre {
+    margin:
+        0;
+
+    font-family:
+        Consolas,
+        Monaco,
+        monospace;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.6;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty-state {
+    grid-column:
+        1 / -1;
+
+    padding:
+        50px 20px;
+
+    text-align:
+        center;
+
+    color:
+        var(--muted);
+}
+
+.empty-icon {
+    font-size:
+        32px;
+
+    margin-bottom:
+        8px;
+}
+
+.empty-title {
+    color:
+        var(--text);
+
+    font-weight:
+        700;
+
+    font-size:
+        12px;
+
+    margin-bottom:
+        4px;
+}
+
+.empty-description {
+    font-size:
+        10px;
+}
+
+
+/* =========================================================
+   ACTION BAR
+========================================================= */
+
+.action-bar {
+    position:
+        sticky;
+
+    bottom:
+        0;
+
+    z-index:
+        50;
+
+    padding:
+        13px 20px;
+
+    background:
+        rgba(255,255,255,.96);
+
+    border-top:
+        1px solid var(--border);
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    backdrop-filter:
+        blur(8px);
+}
+
+.action-info {
+    font-size:
+        10px;
+
+    color:
+        var(--muted);
+}
+
+.buttons {
+    display:
+        flex;
+
+    gap:
+        7px;
+}
+
+.button {
+    padding:
+        9px 15px;
+
+    border:
+        0;
+
+    border-radius:
+        6px;
+
+    font-size:
+        10px;
+
+    font-weight:
+        700;
+
+    cursor:
+        pointer;
+}
+
+.button-secondary {
+    background:
+        #f1f5f9;
+
+    color:
+        var(--text);
+}
+
+.button-primary {
+    background:
+        var(--primary);
+
+    color:
+        white;
+}
+
+.button-primary:hover {
+    background:
+        var(--primary-dark);
+}
+
+.button:disabled {
+    opacity:
+        .5;
+
+    cursor:
+        not-allowed;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1100px) {
+
+    .year-grid {
+        grid-template-columns:
+            repeat(5, 1fr);
+    }
+
+    .period-types {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+    .column-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+@media(max-width:800px) {
+
+    .table-selector {
+        grid-template-columns:
+            1fr;
+    }
+
+    .date-fields {
+        grid-template-columns:
+            1fr;
+    }
+
+    .column-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .form-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+@media(max-width:600px) {
+
+    .page {
+        padding:
+            17px 12px;
+    }
+
+    .period-types {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .year-grid {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+    .month-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .period-grid-small {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .action-bar {
+        flex-direction:
+            column;
+
+        align-items:
+            stretch;
+    }
+
+    .buttons {
+        width:
+            100%;
+    }
+
+    .button {
+        flex:
+            1;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="topbar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            DB
+        </div>
+
+        <div>
+
+            <div class="brand-title">
+                Data Export Manager
+            </div>
+
+            <div class="brand-subtitle">
+                Multi Database Table & Cross Table / Column
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<main class="page">
+
+
+<!-- =========================================================
+     PAGE HEADER
+========================================================= -->
+
+<div class="page-header">
+
+    <h1>
+        Export Data
+    </h1>
+
+    <p>
+        Pilih tabel, periode, grouping, dan kolom untuk membentuk
+        dataset export.
+    </p>
+
+</div>
+
+
+
+<!-- =========================================================
+     STEPS
+========================================================= -->
+
+<div class="steps">
+
+    <div class="step active">
+        <div class="step-number">1</div>
+        <div class="step-label">Tabel</div>
+    </div>
+
+    <div class="step-line"></div>
+
+    <div class="step active">
+        <div class="step-number">2</div>
+        <div class="step-label">Periode</div>
+    </div>
+
+    <div class="step-line"></div>
+
+    <div class="step active">
+        <div class="step-number">3</div>
+        <div class="step-label">Kolom</div>
+    </div>
+
+    <div class="step-line"></div>
+
+    <div class="step active">
+        <div class="step-number">4</div>
+        <div class="step-label">Preview</div>
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     1. TABLE
+========================================================= -->
+
+<section class="card">
+
+    <div class="card-header">
+
+        <div class="card-title">
+            1. Pilih Tabel
+        </div>
+
+        <div class="card-description">
+            Pilih satu atau beberapa tabel.
+        </div>
+
+    </div>
+
+
+    <div class="card-body">
+
+        <div class="table-selector">
+
+
+            <!-- NIB -->
+
+            <div class="table-option">
+
+                <input
+                    type="checkbox"
+                    id="table-nib"
+                    value="nib"
+                    onchange="handleTableChange()"
+                >
+
+                <label for="table-nib">
+
+                    <div class="table-name">
+
+                        <div class="table-icon">
+                            N
+                        </div>
+
+                        Tabel NIB
+
+                    </div>
+
+                    <div class="table-description">
+
+                        Data NIB, identitas perusahaan,
+                        status penanaman modal dan lokasi.
+
+                    </div>
+
+                    <div class="table-count">
+                        10 kolom
+                    </div>
+
+                </label>
+
+            </div>
+
+
+
+            <!-- PROYEK -->
+
+            <div class="table-option">
+
+                <input
+                    type="checkbox"
+                    id="table-proyek"
+                    value="proyek"
+                    onchange="handleTableChange()"
+                >
+
+                <label for="table-proyek">
+
+                    <div class="table-name">
+
+                        <div class="table-icon">
+                            P
+                        </div>
+
+                        Tabel Proyek
+
+                    </div>
+
+                    <div class="table-description">
+
+                        Data proyek, KBLI, risiko,
+                        investasi, tanah dan TKI.
+
+                    </div>
+
+                    <div class="table-count">
+                        22 kolom
+                    </div>
+
+                </label>
+
+            </div>
+
+
+
+            <!-- IZIN -->
+
+            <div class="table-option">
+
+                <input
+                    type="checkbox"
+                    id="table-izin"
+                    value="izin"
+                    onchange="handleTableChange()"
+                >
+
+                <label for="table-izin">
+
+                    <div class="table-name">
+
+                        <div class="table-icon">
+                            I
+                        </div>
+
+                        Tabel Izin
+
+                    </div>
+
+                    <div class="table-description">
+
+                        Data permohonan izin,
+                        status perizinan dan kewenangan.
+
+                    </div>
+
+                    <div class="table-count">
+                        19 kolom
+                    </div>
+
+                </label>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     2. PERIOD
+========================================================= -->
+
+<section class="card">
+
+    <div class="card-header">
+
+        <div class="card-title">
+            2. Periode & Grouping
+        </div>
+
+        <div class="card-description">
+            Pilih satu atau beberapa periode dan tentukan
+            bagaimana data akan dikelompokkan.
+        </div>
+
+    </div>
+
+
+    <div class="card-body">
+
+
+        <!-- PERIOD TYPE -->
+
+        <div class="period-types">
+
+
+            <div class="period-option">
+
+                <input
+                    type="radio"
+                    name="periodType"
+                    id="period-all"
+                    value="all"
+                    checked
+                    onchange="renderPeriodPanel()"
+                >
+
+                <label for="period-all">
+
+                    <div class="period-icon">∞</div>
+
+                    Semua Data
+
+                </label>
+
+            </div>
+
+
+            <div class="period-option">
+
+                <input
+                    type="radio"
+                    name="periodType"
+                    id="period-year"
+                    value="year"
+                    onchange="renderPeriodPanel()"
+                >
+
+                <label for="period-year">
+
+                    <div class="period-icon">📅</div>
+
+                    Tahunan
+
+                </label>
+
+            </div>
+
+
+            <div class="period-option">
+
+                <input
+                    type="radio"
+                    name="periodType"
+                    id="period-month"
+                    value="month"
+                    onchange="renderPeriodPanel()"
+                >
+
+                <label for="period-month">
+
+                    <div class="period-icon">🗓</div>
+
+                    Bulanan
+
+                </label>
+
+            </div>
+
+
+            <div class="period-option">
+
+                <input
+                    type="radio"
+                    name="periodType"
+                    id="period-quarter"
+                    value="quarter"
+                    onchange="renderPeriodPanel()"
+                >
+
+                <label for="period-quarter">
+
+                    <div class="period-icon">Q</div>
+
+                    Triwulan
+
+                </label>
+
+            </div>
+
+
+            <div class="period-option">
+
+                <input
+                    type="radio"
+                    name="periodType"
+                    id="period-semester"
+                    value="semester"
+                    onchange="renderPeriodPanel()"
+                >
+
+                <label for="period-semester">
+
+                    <div class="period-icon">S</div>
+
+                    Semester
+
+                </label>
+
+            </div>
+
+
+            <div class="period-option">
+
+                <input
+                    type="radio"
+                    name="periodType"
+                    id="period-range"
+                    value="range"
+                    onchange="renderPeriodPanel()"
+                >
+
+                <label for="period-range">
+
+                    <div class="period-icon">↔</div>
+
+                    Rentang Tanggal
+
+                </label>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- DYNAMIC PERIOD -->
+
+        <div
+            id="periodPanel"
+            class="period-panel"
+        ></div>
+
+
+
+        <!-- DATE FIELDS -->
+
+        <div
+            id="dateFieldsContainer"
+        ></div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     CROSS TABLE RELATIONSHIP
+========================================================= -->
+
+<section class="card">
+
+    <div class="card-header">
+
+        <div class="card-title">
+            Cross Table / Column Relationship
+        </div>
+
+        <div class="card-description">
+            Relasi yang tersedia untuk menghubungkan data.
+        </div>
+
+    </div>
+
+
+    <div class="card-body">
+
+        <div class="relationship-list">
+
+
+            <div class="relationship-item">
+
+                <strong>NIB.nib</strong>
+
+                <span class="relationship-arrow">
+                    ↔
+                </span>
+
+                <strong>Proyek.Nib</strong>
+
+            </div>
+
+
+            <div class="relationship-item">
+
+                <strong>NIB.nib</strong>
+
+                <span class="relationship-arrow">
+                    ↔
+                </span>
+
+                <strong>Izin.Nib</strong>
+
+            </div>
+
+
+            <div class="relationship-item">
+
+                <strong>Proyek.Id Proyek</strong>
+
+                <span class="relationship-arrow">
+                    ↔
+                </span>
+
+                <strong>Izin.Id Proyek</strong>
+
+            </div>
+
+
+            <div class="relationship-item">
+
+                <strong>Proyek.Kbli</strong>
+
+                <span class="relationship-arrow">
+                    ↔
+                </span>
+
+                <strong>Izin.Kbli</strong>
+
+            </div>
+
+
+            <div class="relationship-item">
+
+                <strong>Nama Perusahaan</strong>
+
+                <span class="relationship-arrow">
+                    ↔
+                </span>
+
+                <strong>Nama Perusahaan</strong>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     3. COLUMNS
+========================================================= -->
+
+<section class="card">
+
+    <div class="card-header">
+
+        <div class="card-title">
+            3. Pilih Kolom
+        </div>
+
+        <div class="card-description">
+            Pilih kolom yang akan dimasukkan ke hasil export.
+        </div>
+
+    </div>
+
+
+    <div class="card-body">
+
+
+        <div class="summary-bar">
+
+            <div class="summary-item">
+                Tabel:
+                <strong id="selectedTableCount">0</strong>
+            </div>
+
+            <div class="summary-item">
+                Kolom:
+                <strong id="selectedColumnCount">0</strong>
+            </div>
+
+            <div class="summary-item">
+                Periode:
+                <strong id="selectedPeriodSummary">
+                    Semua Data
+                </strong>
+            </div>
+
+            <div class="summary-item">
+                Grouping:
+                <strong id="selectedGroupingSummary">
+                    Tidak ada
+                </strong>
+            </div>
+
+        </div>
+
+
+        <div
+            id="columnGrid"
+            class="column-grid"
+        >
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    ☷
+                </div>
+
+                <div class="empty-title">
+                    Belum ada tabel dipilih
+                </div>
+
+                <div class="empty-description">
+                    Pilih minimal satu tabel di atas.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- GROUPING PREVIEW -->
+
+        <div
+            id="groupPreview"
+            class="group-preview"
+            style="display:none;"
+        ></div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     4. JSON PREVIEW
+========================================================= -->
+
+<section class="card">
+
+    <div class="card-header">
+
+        <div class="card-title">
+            4. Export Configuration Preview
+        </div>
+
+        <div class="card-description">
+            Konfigurasi JSON yang dapat dikirim ke backend/API.
+        </div>
+
+    </div>
+
+
+    <div class="card-body">
+
+        <div class="preview">
+
+<pre id="previewJson">{
+  "tables": [],
+  "period": {
+    "type": "all"
+  },
+  "date_fields": {},
+  "columns": []
+}</pre>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     ACTION BAR
+========================================================= -->
+
+<div class="action-bar">
+
+    <div
+        id="actionText"
+        class="action-info"
+    >
+        Belum ada tabel yang dipilih.
+    </div>
+
+
+    <div class="buttons">
+
+        <button
+            class="button button-secondary"
+            onclick="resetAll()"
+        >
+            Reset
+        </button>
+
+
+        <button
+            id="exportButton"
+            class="button button-primary"
+            disabled
+            onclick="exportData()"
+        >
+            Export Data
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   DATABASE SCHEMA
+========================================================= */
+
+const databaseSchema = {
+
+    nib: {
+
+        label: "Tabel NIB",
+        icon: "N",
+
+        dateFields: [
+
+            {
+                value: "tanggal_terbit_oss",
+                label: "Day of tanggal_terbit_oss"
+            }
+
+        ],
+
+        columns: [
+
+            {
+                name: "nib",
+                label: "nib",
+                type: "key",
+                relations: [
+                    "proyek.Nib",
+                    "izin.Nib"
+                ]
+            },
+
+            {
+                name: "tanggal_terbit_oss",
+                label: "Day of tanggal_terbit_oss",
+                type: "date"
+            },
+
+            {
+                name: "nama_perusahaan",
+                label: "nama_perusahaan",
+                type: "cross",
+                relations: [
+                    "proyek.Nama Perusahaan",
+                    "izin.Nama Perusahaan"
+                ]
+            },
+
+            {
+                name: "status_penanaman_modal",
+                label: "status_penanaman_modal",
+                type: "cross"
+            },
+
+            {
+                name: "uraian_jenis_perusahaan",
+                label: "uraian_jenis_perusahaan",
+                type: "cross"
+            },
+
+            {
+                name: "uraian_skala_usaha",
+                label: "uraian_skala_usaha",
+                type: "cross"
+            },
+
+            {
+                name: "alamat_perusahaan",
+                label: "Alamat Perusahaan"
+            },
+
+            {
+                name: "kelurahan",
+                label: "kelurahan",
+                type: "cross"
+            },
+
+            {
+                name: "kecamatan",
+                label: "kecamatan",
+                type: "cross"
+            },
+
+            {
+                name: "kab_kota",
+                label: "kab_kota",
+                type: "cross"
+            }
+
+        ]
+
+    },
+
+
+    proyek: {
+
+        label: "Tabel Proyek",
+        icon: "P",
+
+        dateFields: [
+
+            {
+                value: "tanggal_terbit_oss",
+                label: "Tanggal Terbit Oss"
+            },
+
+            {
+                value: "tanggal_pengajuan_proyek",
+                label: "Day of Tanggal Pengajuan Proyek"
+            }
+
+        ],
+
+        columns: [
+
+            {
+                name: "id_proyek",
+                label: "Id Proyek",
+                type: "key",
+                relations: [
+                    "izin.Id Proyek"
+                ]
+            },
+
+            {
+                name: "uraian_jenis_proyek",
+                label: "Uraian_Jenis_Proyek"
+            },
+
+            {
+                name: "nib",
+                label: "Nib",
+                type: "cross",
+                relations: [
+                    "nib.nib",
+                    "izin.Nib"
+                ]
+            },
+
+            {
+                name: "nama_perusahaan",
+                label: "Nama Perusahaan",
+                type: "cross",
+                relations: [
+                    "nib.nama_perusahaan",
+                    "izin.Nama Perusahaan"
+                ]
+            },
+
+            {
+                name: "tanggal_terbit_oss",
+                label: "Tanggal Terbit Oss",
+                type: "date"
+            },
+
+            {
+                name: "uraian_status_penanaman_modal",
+                label: "Uraian Status Penanaman Modal"
+            },
+
+            {
+                name: "uraian_jenis_perusahaan",
+                label: "Uraian Jenis Perusahaan"
+            },
+
+            {
+                name: "uraian_risiko_proyek",
+                label: "Uraian Risiko Proyek"
+            },
+
+            {
+                name: "nama_proyek",
+                label: "nama_proyek"
+            },
+
+            {
+                name: "uraian_skala_usaha",
+                label: "Uraian Skala Usaha"
+            },
+
+            {
+                name: "alamat_usaha",
+                label: "Alamat Usaha"
+            },
+
+            {
+                name: "kab_kota_usaha",
+                label: "Kab Kota Usaha"
+            },
+
+            {
+                name: "kecamatan_usaha",
+                label: "kecamatan_usaha"
+            },
+
+            {
+                name: "kelurahan_usaha",
+                label: "kelurahan_usaha"
+            },
+
+            {
+                name: "tanggal_pengajuan_proyek",
+                label: "Day of Tanggal Pengajuan Proyek",
+                type: "date"
+            },
+
+            {
+                name: "kbli",
+                label: "Kbli",
+                type: "cross",
+                relations: [
+                    "izin.Kbli"
+                ]
+            },
+
+            {
+                name: "judul_kbli",
+                label: "Judul Kbli"
+            },
+
+            {
+                name: "kl_sektor_pembina",
+                label: "KL/Sektor Pembina"
+            },
+
+            {
+                name: "luas_tanah",
+                label: "luas_tanah"
+            },
+
+            {
+                name: "satuan_tanah",
+                label: "satuan_tanah"
+            },
+
+            {
+                name: "jumlah_investasi",
+                label: "Jumlah Investasi"
+            },
+
+            {
+                name: "tki",
+                label: "TKI"
+            }
+
+        ]
+
+    },
+
+
+    izin: {
+
+        label: "Tabel Izin",
+        icon: "I",
+
+        dateFields: [
+
+            {
+                value: "tanggal_terbit_oss",
+                label: "Day of Tanggal Terbit Oss"
+            },
+
+            {
+                value: "tgl_izin",
+                label: "Day of Tgl Izin"
+            }
+
+        ],
+
+        columns: [
+
+            {
+                name: "id_permohonan_izin",
+                label: "Id Permohonan Izin",
+                type: "key"
+            },
+
+            {
+                name: "nama_perusahaan",
+                label: "Nama Perusahaan",
+                type: "cross",
+                relations: [
+                    "nib.nama_perusahaan",
+                    "proyek.Nama Perusahaan"
+                ]
+            },
+
+            {
+                name: "nib",
+                label: "Nib",
+                type: "cross",
+                relations: [
+                    "nib.nib",
+                    "proyek.Nib"
+                ]
+            },
+
+            {
+                name: "tanggal_terbit_oss",
+                label: "Day of Tanggal Terbit Oss",
+                type: "date"
+            },
+
+            {
+                name: "uraian_status_penanaman_modal",
+                label: "Uraian Status Penanaman Modal"
+            },
+
+            {
+                name: "propinsi",
+                label: "Propinsi"
+            },
+
+            {
+                name: "kab_kota",
+                label: "Kab Kota",
+                type: "cross"
+            },
+
+            {
+                name: "kecamatan",
+                label: "kecamatan",
+                type: "cross"
+            },
+
+            {
+                name: "kelurahan",
+                label: "kelurahan",
+                type: "cross"
+            },
+
+            {
+                name: "id_proyek",
+                label: "Id Proyek",
+                type: "cross",
+                relations: [
+                    "proyek.Id Proyek"
+                ]
+            },
+
+            {
+                name: "kd_resiko",
+                label: "Kd Resiko"
+            },
+
+            {
+                name: "kbli",
+                label: "Kbli",
+                type: "cross",
+                relations: [
+                    "proyek.Kbli"
+                ]
+            },
+
+            {
+                name: "tgl_izin",
+                label: "Day of Tgl Izin",
+                type: "date"
+            },
+
+            {
+                name: "uraian_jenis_perizinan",
+                label: "Uraian Jenis Perizinan"
+            },
+
+            {
+                name: "nama_dokumen",
+                label: "Nama Dokumen"
+            },
+
+            {
+                name: "uraian_kewenangan",
+                label: "Uraian Kewenangan"
+            },
+
+            {
+                name: "status_perizinan",
+                label: "Status Perizinan"
+            },
+
+            {
+                name: "kewenangan",
+                label: "Kewenangan"
+            },
+
+            {
+                name: "kl_sektor",
+                label: "kl_sektor"
+            }
+
+        ]
+
+    }
+
+};
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+const selectedColumns = {};
+
+const selectedDateFields = {};
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function getSelectedTables() {
+
+    return Array.from(
+        document.querySelectorAll(
+            ".table-option input:checked"
+        )
+    ).map(
+        input => input.value
+    );
+
+}
+
+
+function getPeriodType() {
+
+    return document.querySelector(
+        'input[name="periodType"]:checked'
+    ).value;
+
+}
+
+
+function getCurrentYear() {
+
+    return new Date().getFullYear();
+
+}
+
+
+/* =========================================================
+   PERIOD PANEL
+========================================================= */
+
+function renderPeriodPanel() {
+
+    const type =
+        getPeriodType();
+
+    const panel =
+        document.getElementById(
+            "periodPanel"
+        );
+
+
+    let html = "";
+
+
+    /* -------------------------------------------------------
+       ALL
+    ------------------------------------------------------- */
+
+    if (type === "all") {
+
+        html = `
+
+            <div class="period-panel-title">
+                Semua Data
+            </div>
+
+            <div class="period-panel-description">
+                Mengambil seluruh data yang tersedia
+                pada database.
+            </div>
+
+            <div class="info-box">
+
+                Sistem akan menggunakan seluruh rentang
+                tanggal yang tersedia pada masing-masing
+                tabel, mulai dari tanggal minimum sampai
+                tanggal maksimum.
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* -------------------------------------------------------
+       YEAR
+    ------------------------------------------------------- */
+
+    else if (type === "year") {
+
+        html = `
+
+            <div class="period-panel-title">
+                Pilih Tahun
+            </div>
+
+            <div class="period-panel-description">
+
+                Anda dapat memilih beberapa tahun sekaligus.
+
+            </div>
+
+
+            <div class="multi-select-header">
+
+                <div class="multi-select-title">
+                    Tahun
+                </div>
+
+                <div class="mini-actions">
+
+                    <button
+                        class="mini-button"
+                        onclick="selectAllPeriods('year')"
+                    >
+                        Pilih Semua
+                    </button>
+
+                    <button
+                        class="mini-button"
+                        onclick="clearPeriods('year')"
+                    >
+                        Hapus Semua
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="yearGrid"
+                class="year-grid"
+            >
+
+                ${generateYearOptions()}
+
+            </div>
+
+
+            ${renderGrouping(
+                ["none", "year"]
+            )}
+
+        `;
+
+    }
+
+
+    /* -------------------------------------------------------
+       MONTH
+    ------------------------------------------------------- */
+
+    else if (type === "month") {
+
+        html = `
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    Tahun
+                </label>
+
+                <select
+                    id="monthYear"
+                    class="form-control"
+                    onchange="updateAll()"
+                >
+
+                    ${generateYearSelect()}
+
+                </select>
+
+            </div>
+
+
+            <br>
+
+
+            <div class="multi-select-header">
+
+                <div class="multi-select-title">
+                    Pilih Bulan
+                </div>
+
+                <div class="mini-actions">
+
+                    <button
+                        class="mini-button"
+                        onclick="selectAllPeriods('month')"
+                    >
+                        Pilih Semua
+                    </button>
+
+                    <button
+                        class="mini-button"
+                        onclick="clearPeriods('month')"
+                    >
+                        Hapus Semua
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="monthGrid"
+                class="month-grid"
+            >
+
+                ${generateMonthOptions()}
+
+            </div>
+
+
+            ${renderGrouping(
+                ["none", "month"]
+            )}
+
+        `;
+
+    }
+
+
+    /* -------------------------------------------------------
+       QUARTER
+    ------------------------------------------------------- */
+
+    else if (type === "quarter") {
+
+        html = `
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    Tahun
+                </label>
+
+                <select
+                    id="quarterYear"
+                    class="form-control"
+                    onchange="updateAll()"
+                >
+
+                    ${generateYearSelect()}
+
+                </select>
+
+            </div>
+
+
+            <br>
+
+
+            <div class="multi-select-header">
+
+                <div class="multi-select-title">
+                    Pilih Triwulan
+                </div>
+
+                <div class="mini-actions">
+
+                    <button
+                        class="mini-button"
+                        onclick="selectAllPeriods('quarter')"
+                    >
+                        Pilih Semua
+                    </button>
+
+                    <button
+                        class="mini-button"
+                        onclick="clearPeriods('quarter')"
+                    >
+                        Hapus Semua
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="period-grid-small">
+
+                ${generateQuarterOptions()}
+
+            </div>
+
+
+            ${renderGrouping(
+                ["none", "quarter"]
+            )}
+
+        `;
+
+    }
+
+
+    /* -------------------------------------------------------
+       SEMESTER
+    ------------------------------------------------------- */
+
+    else if (type === "semester") {
+
+        html = `
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    Tahun
+                </label>
+
+                <select
+                    id="semesterYear"
+                    class="form-control"
+                    onchange="updateAll()"
+                >
+
+                    ${generateYearSelect()}
+
+                </select>
+
+            </div>
+
+
+            <br>
+
+
+            <div class="multi-select-header">
+
+                <div class="multi-select-title">
+                    Pilih Semester
+                </div>
+
+                <div class="mini-actions">
+
+                    <button
+                        class="mini-button"
+                        onclick="selectAllPeriods('semester')"
+                    >
+                        Pilih Semua
+                    </button>
+
+                    <button
+                        class="mini-button"
+                        onclick="clearPeriods('semester')"
+                    >
+                        Hapus Semua
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="period-grid-small">
+
+                ${generateSemesterOptions()}
+
+            </div>
+
+
+            ${renderGrouping(
+                ["none", "semester"]
+            )}
+
+        `;
+
+    }
+
+
+    /* -------------------------------------------------------
+       RANGE
+    ------------------------------------------------------- */
+
+    else if (type === "range") {
+
+        html = `
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        Dari Tanggal
+                    </label>
+
+                    <input
+                        id="rangeStart"
+                        type="date"
+                        class="form-control"
+                        value="2026-01-01"
+                        onchange="updateAll()"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        Sampai Tanggal
+                    </label>
+
+                    <input
+                        id="rangeEnd"
+                        type="date"
+                        class="form-control"
+                        value="2026-07-31"
+                        onchange="updateAll()"
+                    >
+
+                </div>
+
+            </div>
+
+
+            ${renderGrouping([
+                "none",
+                "year",
+                "quarter",
+                "month"
+            ])}
+
+
+            <div class="info-box">
+
+                Contoh:
+                <strong>
+                    1 Januari 2026
+                </strong>
+                sampai
+                <strong>
+                    31 Juli 2026
+                </strong>
+                dengan Grouping by Month akan menghasilkan
+                Januari sampai Juli 2026.
+
+            </div>
+
+        `;
+
+    }
+
+
+    panel.innerHTML =
+        html;
+
+
+    updateAll();
+
+}
+
+
+/* =========================================================
+   GROUPING
+========================================================= */
+
+function renderGrouping(
+    options
+) {
+
+    const labels = {
+
+        none:
+            "Tidak dikelompokkan",
+
+        year:
+            "Grouping by Year",
+
+        month:
+            "Grouping by Month",
+
+        quarter:
+            "Grouping by Quarter",
+
+        semester:
+            "Grouping by Semester"
+
+    };
+
+
+    return `
+
+        <div class="grouping-panel">
+
+            <div class="grouping-title">
+                Grouping Output
+            </div>
+
+            <div class="radio-row">
+
+                ${options.map(
+                    (option, index) => `
+
+                    <label class="radio-option">
+
+                        <input
+                            type="radio"
+                            name="grouping"
+                            value="${option}"
+                            ${index === 0 ? "checked" : ""}
+                            onchange="updateAll()"
+                        >
+
+                        ${labels[option]}
+
+                    </label>
+
+                `
+                ).join("")}
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+function getGrouping() {
+
+    const radio =
+        document.querySelector(
+            'input[name="grouping"]:checked'
+        );
+
+    return radio
+        ? radio.value
+        : "none";
+
+}
+
+
+/* =========================================================
+   YEAR OPTIONS
+========================================================= */
+
+function generateYearOptions() {
+
+    const current =
+        getCurrentYear();
+
+    let html = "";
+
+
+    for (
+        let year = 2020;
+        year <= current + 1;
+        year++
+    ) {
+
+        html += `
+
+            <div class="period-check">
+
+                <input
+                    type="checkbox"
+                    id="year-${year}"
+                    value="${year}"
+                    onchange="updateAll()"
+                >
+
+                <label for="year-${year}">
+                    ${year}
+                </label>
+
+            </div>
+
+        `;
+
+    }
+
+
+    return html;
+
+}
+
+
+function generateYearSelect() {
+
+    const current =
+        getCurrentYear();
+
+    let html = "";
+
+
+    for (
+        let year = 2020;
+        year <= current + 1;
+        year++
+    ) {
+
+        html += `
+
+            <option
+                value="${year}"
+                ${year === current ? "selected" : ""}
+            >
+                ${year}
+            </option>
+
+        `;
+
+    }
+
+
+    return html;
+
+}
+
+
+/* =========================================================
+   MONTH OPTIONS
+========================================================= */
+
+const months = [
+
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli",
+    "Agustus",
+    "September",
+    "Oktober",
+    "November",
+    "Desember"
+
+];
+
+
+function generateMonthOptions() {
+
+    return months.map(
+        (month, index) => `
+
+            <div class="period-check">
+
+                <input
+                    type="checkbox"
+                    id="month-${index + 1}"
+                    value="${index + 1}"
+                    onchange="updateAll()"
+                >
+
+                <label for="month-${index + 1}">
+                    ${month}
+                </label>
+
+            </div>
+
+        `
+    ).join("");
+
+}
+
+
+/* =========================================================
+   QUARTER OPTIONS
+========================================================= */
+
+function generateQuarterOptions() {
+
+    const quarters = [
+
+        ["Q1", "Jan - Mar"],
+        ["Q2", "Apr - Jun"],
+        ["Q3", "Jul - Sep"],
+        ["Q4", "Okt - Des"]
+
+    ];
+
+
+    return quarters.map(
+        q => `
+
+            <div class="period-check">
+
+                <input
+                    type="checkbox"
+                    id="quarter-${q[0]}"
+                    value="${q[0]}"
+                    onchange="updateAll()"
+                >
+
+                <label for="quarter-${q[0]}">
+
+                    <strong>${q[0]}</strong>
+
+                    <span>
+                        ${q[1]}
+                    </span>
+
+                </label>
+
+            </div>
+
+        `
+    ).join("");
+
+}
+
+
+/* =========================================================
+   SEMESTER OPTIONS
+========================================================= */
+
+function generateSemesterOptions() {
+
+    return [
+
+        ["S1", "Jan - Jun"],
+        ["S2", "Jul - Des"]
+
+    ].map(
+        s => `
+
+            <div class="period-check">
+
+                <input
+                    type="checkbox"
+                    id="semester-${s[0]}"
+                    value="${s[0]}"
+                    onchange="updateAll()"
+                >
+
+                <label for="semester-${s[0]}">
+
+                    <strong>
+                        Semester ${s[0].replace("S", "")}
+                    </strong>
+
+                    <span>
+                        ${s[1]}
+                    </span>
+
+                </label>
+
+            </div>
+
+        `
+    ).join("");
+
+}
+
+
+/* =========================================================
+   SELECT ALL PERIOD
+========================================================= */
+
+function selectAllPeriods(type) {
+
+    let selector = "";
+
+    if (type === "year") {
+        selector =
+            "#yearGrid input[type=checkbox]";
+    }
+
+    if (type === "month") {
+        selector =
+            "#monthGrid input[type=checkbox]";
+    }
+
+    if (type === "quarter") {
+        selector =
+            ".period-grid-small input[type=checkbox]";
+    }
+
+    if (type === "semester") {
+        selector =
+            ".period-grid-small input[type=checkbox]";
+    }
+
+
+    document.querySelectorAll(
+        selector
+    ).forEach(
+        input => {
+            input.checked = true;
+        }
+    );
+
+
+    updateAll();
+
+}
+
+
+function clearPeriods(type) {
+
+    let selector = "";
+
+    if (type === "year") {
+        selector =
+            "#yearGrid input[type=checkbox]";
+    }
+
+    if (type === "month") {
+        selector =
+            "#monthGrid input[type=checkbox]";
+    }
+
+    if (
+        type === "quarter" ||
+        type === "semester"
+    ) {
+        selector =
+            ".period-grid-small input[type=checkbox]";
+    }
+
+
+    document.querySelectorAll(
+        selector
+    ).forEach(
+        input => {
+            input.checked = false;
+        }
+    );
+
+
+    updateAll();
+
+}
+
+
+/* =========================================================
+   PERIOD CONFIGURATION
+========================================================= */
+
+function getPeriodConfiguration() {
+
+    const type =
+        getPeriodType();
+
+    const grouping =
+        getGrouping();
+
+
+    const result = {
+
+        type: type,
+
+        values: [],
+
+        group_by:
+            grouping === "none"
+                ? null
+                : grouping
+
+    };
+
+
+    /* ALL */
+
+    if (type === "all") {
+
+        delete result.values;
+
+        result.group_by = null;
+
+        return result;
+
+    }
+
+
+    /* YEAR */
+
+    if (type === "year") {
+
+        result.values =
+            Array.from(
+                document.querySelectorAll(
+                    "#yearGrid input:checked"
+                )
+            ).map(
+                input =>
+                    Number(input.value)
+            );
+
+    }
+
+
+    /* MONTH */
+
+    if (type === "month") {
+
+        const year =
+            document.getElementById(
+                "monthYear"
+            );
+
+
+        result.year =
+            Number(year.value);
+
+
+        result.values =
+            Array.from(
+                document.querySelectorAll(
+                    "#monthGrid input:checked"
+                )
+            ).map(
+                input =>
+                    Number(input.value)
+            );
+
+    }
+
+
+    /* QUARTER */
+
+    if (type === "quarter") {
+
+        const year =
+            document.getElementById(
+                "quarterYear"
+            );
+
+
+        result.year =
+            Number(year.value);
+
+
+        result.values =
+            Array.from(
+                document.querySelectorAll(
+                    ".period-grid-small input:checked"
+                )
+            ).map(
+                input =>
+                    input.value
+            );
+
+    }
+
+
+    /* SEMESTER */
+
+    if (type === "semester") {
+
+        const year =
+            document.getElementById(
+                "semesterYear"
+            );
+
+
+        result.year =
+            Number(year.value);
+
+
+        result.values =
+            Array.from(
+                document.querySelectorAll(
+                    ".period-grid-small input:checked"
+                )
+            ).map(
+                input =>
+                    input.value
+            );
+
+    }
+
+
+    /* RANGE */
+
+    if (type === "range") {
+
+        result.start =
+            document.getElementById(
+                "rangeStart"
+            ).value;
+
+
+        result.end =
+            document.getElementById(
+                "rangeEnd"
+            ).value;
+
+    }
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   DATE FIELDS
+========================================================= */
+
+function renderDateFields() {
+
+    const tables =
+        getSelectedTables();
+
+
+    const container =
+        document.getElementById(
+            "dateFieldsContainer"
+        );
+
+
+    if (!tables.length) {
+
+        container.innerHTML =
+            "";
+
+        return;
+
+    }
+
+
+    let html = `
+
+        <div
+            style="
+                margin-top:18px;
+                font-size:11px;
+                font-weight:700;
+                margin-bottom:8px;
+            "
+        >
+            Field Tanggal untuk Filter
+        </div>
+
+        <div class="date-fields">
+
+    `;
+
+
+    tables.forEach(
+        tableName => {
+
+            const table =
+                databaseSchema[
+                    tableName
+                ];
+
+
+            if (
+                !selectedDateFields[
+                    tableName
+                ]
+            ) {
+
+                selectedDateFields[
+                    tableName
+                ] =
+                    table.dateFields[0].value;
+
+            }
+
+
+            html += `
+
+                <div class="date-field-card">
+
+                    <div class="date-field-header">
+
+                        <div class="date-field-icon">
+                            📅
+                        </div>
+
+                        <div>
+
+                            <div
+                                style="
+                                    font-size:11px;
+                                    font-weight:700;
+                                "
+                            >
+                                ${table.label}
+                            </div>
+
+                            <div
+                                style="
+                                    color:var(--muted);
+                                    font-size:9px;
+                                "
+                            >
+                                Field tanggal
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <select
+                        class="form-control"
+                        onchange="
+                            selectedDateFields['${tableName}']
+                            = this.value;
+                            updateAll();
+                        "
+                    >
+
+                        ${table.dateFields.map(
+                            field => `
+
+                            <option
+                                value="${field.value}"
+                                ${
+                                    selectedDateFields[
+                                        tableName
+                                    ] === field.value
+                                    ? "selected"
+                                    : ""
+                                }
+                            >
+                                ${field.label}
+                            </option>
+
+                        `
+                        ).join("")}
+
+                    </select>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+        </div>
+    `;
+
+
+    container.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   TABLE CHANGE
+========================================================= */
+
+function handleTableChange() {
+
+    const tables =
+        getSelectedTables();
+
+
+    tables.forEach(
+        tableName => {
+
+            if (
+                !selectedColumns[
+                    tableName
+                ]
+            ) {
+
+                selectedColumns[
+                    tableName
+                ] = [];
+
+            }
+
+        }
+    );
+
+
+    renderDateFields();
+
+    renderColumns();
+
+    updateAll();
+
+}
+
+
+/* =========================================================
+   COLUMNS
+========================================================= */
+
+function renderColumns() {
+
+    const tables =
+        getSelectedTables();
+
+
+    const grid =
+        document.getElementById(
+            "columnGrid"
+        );
+
+
+    grid.innerHTML = "";
+
+
+    if (!tables.length) {
+
+        grid.innerHTML = `
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    ☷
+                </div>
+
+                <div class="empty-title">
+                    Belum ada tabel dipilih
+                </div>
+
+                <div class="empty-description">
+                    Pilih minimal satu tabel.
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    tables.forEach(
+        tableName => {
+
+            const table =
+                databaseSchema[
+                    tableName
+                ];
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "column-card";
+
+
+            card.innerHTML = `
+
+                <div class="column-card-header">
+
+                    <div>
+
+                        <div class="column-card-title">
+
+                            <div class="table-icon">
+                                ${table.icon}
+                            </div>
+
+                            ${table.label}
+
+                        </div>
+
+                        <div class="column-card-count">
+                            ${table.columns.length}
+                            kolom
+                        </div>
+
+                    </div>
+
+
+                    <div class="column-actions">
+
+                        <button
+                            class="small-button"
+                            onclick="
+                                selectAllColumns(
+                                    '${tableName}'
+                                )
+                            "
+                        >
+                            All
+                        </button>
+
+                        <button
+                            class="small-button"
+                            onclick="
+                                clearColumns(
+                                    '${tableName}'
+                                )
+                            "
+                        >
+                            Clear
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="search-box">
+
+                    <input
+                        type="text"
+                        placeholder="Cari kolom..."
+                        oninput="
+                            filterColumns(
+                                '${tableName}',
+                                this.value
+                            )
+                        "
+                    >
+
+                </div>
+
+
+                <div
+                    id="column-list-${tableName}"
+                    class="column-list"
+                ></div>
+
+            `;
+
+
+            grid.appendChild(
+                card
+            );
+
+
+            renderColumnList(
+                tableName
+            );
+
+        }
+    );
+
+}
+
+
+function renderColumnList(
+    tableName,
+    search = ""
+) {
+
+    const container =
+        document.getElementById(
+            `column-list-${tableName}`
+        );
+
+
+    const table =
+        databaseSchema[
+            tableName
+        ];
+
+
+    container.innerHTML =
+        "";
+
+
+    table.columns
+        .filter(
+            column =>
+                column.label
+                    .toLowerCase()
+                    .includes(
+                        search.toLowerCase()
+                    )
+        )
+        .forEach(
+            column => {
+
+                const checked =
+                    (
+                        selectedColumns[
+                            tableName
+                        ] || []
+                    ).includes(
+                        column.name
+                    );
+
+
+                let badges = "";
+
+
+                if (
+                    column.type === "key"
+                ) {
+
+                    badges += `
+                        <span class="badge badge-key">
+                            KEY
+                        </span>
+                    `;
+
+                }
+
+
+                if (
+                    column.type === "cross" ||
+                    column.relations
+                ) {
+
+                    badges += `
+                        <span class="badge badge-cross">
+                            CROSS
+                        </span>
+                    `;
+
+                }
+
+
+                if (
+                    column.type === "date"
+                ) {
+
+                    badges += `
+                        <span class="badge badge-date">
+                            DATE
+                        </span>
+                    `;
+
+                }
+
+
+                const item =
+                    document.createElement(
+                        "label"
+                    );
+
+
+                item.className =
+                    "column-item";
+
+
+                item.innerHTML = `
+
+                    <input
+                        type="checkbox"
+                        ${checked ? "checked" : ""}
+                        onchange="
+                            toggleColumn(
+                                '${tableName}',
+                                '${column.name}'
+                            )
+                        "
+                    >
+
+
+                    <div>
+
+                        <div class="column-name">
+                            ${column.label}
+                        </div>
+
+                        <div class="column-meta">
+
+                            ${badges}
+
+                        </div>
+
+                    </div>
+
+                `;
+
+
+                container.appendChild(
+                    item
+                );
+
+            }
+        );
+
+}
+
+
+function toggleColumn(
+    tableName,
+    columnName
+) {
+
+    if (
+        !selectedColumns[
+            tableName
+        ]
+    ) {
+
+        selectedColumns[
+            tableName
+        ] = [];
+
+    }
+
+
+    const list =
+        selectedColumns[
+            tableName
+        ];
+
+
+    const index =
+        list.indexOf(
+            columnName
+        );
+
+
+    if (index === -1) {
+
+        list.push(
+            columnName
+        );
+
+    } else {
+
+        list.splice(
+            index,
+            1
+        );
+
+    }
+
+
+    updateAll();
+
+}
+
+
+function selectAllColumns(
+    tableName
+) {
+
+    selectedColumns[
+        tableName
+    ] =
+        databaseSchema[
+            tableName
+        ].columns.map(
+            column =>
+                column.name
+        );
+
+
+    renderColumnList(
+        tableName
+    );
+
+
+    updateAll();
+
+}
+
+
+function clearColumns(
+    tableName
+) {
+
+    selectedColumns[
+        tableName
+    ] = [];
+
+
+    renderColumnList(
+        tableName
+    );
+
+
+    updateAll();
+
+}
+
+
+function filterColumns(
+    tableName,
+    search
+) {
+
+    renderColumnList(
+        tableName,
+        search
+    );
+
+}
+
+
+/* =========================================================
+   GROUP PREVIEW
+========================================================= */
+
+function renderGroupPreview() {
+
+    const container =
+        document.getElementById(
+            "groupPreview"
+        );
+
+
+    const type =
+        getPeriodType();
+
+
+    const grouping =
+        getGrouping();
+
+
+    const tables =
+        getSelectedTables();
+
+
+    if (
+        grouping === "none" ||
+        !tables.length
+    ) {
+
+        container.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    const period =
+        getPeriodConfiguration();
+
+
+    let groups = [];
+
+
+    if (
+        type === "year"
+    ) {
+
+        groups =
+            period.values
+                .map(
+                    year =>
+                        String(year)
+                );
+
+    }
+
+
+    if (
+        type === "month"
+    ) {
+
+        groups =
+            period.values
+                .map(
+                    month =>
+                        `${months[month - 1]} ${period.year}`
+                );
+
+    }
+
+
+    if (
+        type === "quarter"
+    ) {
+
+        groups =
+            period.values
+                .map(
+                    q =>
+                        `${q} ${period.year}`
+                );
+
+    }
+
+
+    if (
+        type === "semester"
+    ) {
+
+        groups =
+            period.values
+                .map(
+                    s =>
+                        `Semester ${s.replace(
+                            "S",
+                            ""
+                        )} ${period.year}`
+                );
+
+    }
+
+
+    if (
+        type === "range"
+    ) {
+
+        if (
+            grouping === "year"
+        ) {
+
+            groups = [
+                "2026"
+            ];
+
+        }
+
+        else if (
+            grouping === "quarter"
+        ) {
+
+            groups = [
+                "Q1 2026",
+                "Q2 2026",
+                "Q3 2026"
+            ];
+
+        }
+
+        else if (
+            grouping === "month"
+        ) {
+
+            groups = [
+                "Januari 2026",
+                "Februari 2026",
+                "Maret 2026",
+                "April 2026",
+                "Mei 2026",
+                "Juni 2026",
+                "Juli 2026"
+            ];
+
+        }
+
+    }
+
+
+    if (!groups.length) {
+
+        container.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    container.style.display =
+        "block";
+
+
+    let html = `
+
+        <div class="group-preview-title">
+
+            Preview Struktur Grouping
+
+        </div>
+
+        <div class="group-tree">
+
+    `;
+
+
+    groups.forEach(
+        group => {
+
+            html += `
+
+                <div class="group-node">
+
+                    <div class="group-node-header">
+
+                        <span>
+                            ${group}
+                        </span>
+
+                        <span>
+                            ${tables.length}
+                            tabel
+                        </span>
+
+                    </div>
+
+
+                    <div class="group-node-body">
+
+                        ${tables.map(
+                            table =>
+                                `<span class="group-table-badge">
+                                    ${databaseSchema[table].label}
+                                </span>`
+                        ).join("")}
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+        </div>
+    `;
+
+
+    container.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   UPDATE SUMMARY
+========================================================= */
+
+function updateSummary() {
+
+    const tables =
+        getSelectedTables();
+
+
+    let columnCount =
+        0;
+
+
+    tables.forEach(
+        table => {
+
+            columnCount +=
+                (
+                    selectedColumns[
+                        table
+                    ] || []
+                ).length;
+
+        }
+    );
+
+
+    document.getElementById(
+        "selectedTableCount"
+    ).textContent =
+        tables.length;
+
+
+    document.getElementById(
+        "selectedColumnCount"
+    ).textContent =
+        columnCount;
+
+
+    document.getElementById(
+        "selectedGroupingSummary"
+    ).textContent =
+        getGrouping() === "none"
+            ? "Tidak ada"
+            : getGrouping();
+
+
+    updatePeriodSummary();
+
+
+    const button =
+        document.getElementById(
+            "exportButton"
+        );
+
+
+    button.disabled =
+        tables.length === 0 ||
+        columnCount === 0;
+
+
+    const action =
+        document.getElementById(
+            "actionText"
+        );
+
+
+    if (!tables.length) {
+
+        action.textContent =
+            "Belum ada tabel yang dipilih.";
+
+    }
+
+    else if (!columnCount) {
+
+        action.textContent =
+            `${tables.length} tabel dipilih. Pilih kolom.`;
+
+    }
+
+    else {
+
+        action.textContent =
+            `${tables.length} tabel • ${columnCount} kolom siap diexport.`;
+
+    }
+
+}
+
+
+/* =========================================================
+   PERIOD SUMMARY
+========================================================= */
+
+function updatePeriodSummary() {
+
+    const type =
+        getPeriodType();
+
+
+    let text =
+        "Semua Data";
+
+
+    try {
+
+        const period =
+            getPeriodConfiguration();
+
+
+        if (
+            type === "year"
+        ) {
+
+            text =
+                period.values.length
+                    ? period.values.join(", ")
+                    : "Belum dipilih";
+
+        }
+
+
+        if (
+            type === "month"
+        ) {
+
+            text =
+                period.values.length
+                    ? `${period.year} • ${period.values.map(
+                        m => months[m - 1]
+                    ).join(", ")}`
+                    : "Belum dipilih";
+
+        }
+
+
+        if (
+            type === "quarter"
+        ) {
+
+            text =
+                period.values.length
+                    ? `${period.year} • ${period.values.join(", ")}`
+                    : "Belum dipilih";
+
+        }
+
+
+        if (
+            type === "semester"
+        ) {
+
+            text =
+                period.values.length
+                    ? `${period.year} • ${period.values.join(", ")}`
+                    : "Belum dipilih";
+
+        }
+
+
+        if (
+            type === "range"
+        ) {
+
+            text =
+                `${period.start} → ${period.end}`;
+
+        }
+
+    }
+
+    catch (error) {
+
+        text =
+            "Belum lengkap";
+
+    }
+
+
+    document.getElementById(
+        "selectedPeriodSummary"
+    ).textContent =
+        text;
+
+}
+
+
+/* =========================================================
+   DATE FIELD CONFIG
+========================================================= */
+
+function getDateFieldConfig() {
+
+    const result = {};
+
+
+    getSelectedTables().forEach(
+        table => {
+
+            result[table] =
+                selectedDateFields[
+                    table
+                ] ||
+                databaseSchema[
+                    table
+                ].dateFields[0].value;
+
+        }
+    );
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   COLUMNS CONFIG
+========================================================= */
+
+function getColumnConfig() {
+
+    const result = [];
+
+
+    getSelectedTables().forEach(
+        table => {
+
+            (
+                selectedColumns[
+                    table
+                ] || []
+            ).forEach(
+                column => {
+
+                    result.push({
+
+                        table:
+                            table,
+
+                        column:
+                            column
+
+                    });
+
+                }
+            );
+
+        }
+    );
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   COMPLETE CONFIG
+========================================================= */
+
+function getExportConfiguration() {
+
+    return {
+
+        tables:
+            getSelectedTables(),
+
+        period:
+            getPeriodConfiguration(),
+
+        date_fields:
+            getDateFieldConfig(),
+
+        columns:
+            getColumnConfig()
+
+    };
+
+}
+
+
+/* =========================================================
+   UPDATE JSON
+========================================================= */
+
+function updatePreview() {
+
+    let config;
+
+
+    try {
+
+        config =
+            getExportConfiguration();
+
+    }
+
+    catch (error) {
+
+        config = {
+            error:
+                "Konfigurasi belum lengkap."
+        };
+
+    }
+
+
+    document.getElementById(
+        "previewJson"
+    ).textContent =
+        JSON.stringify(
+            config,
+            null,
+            2
+        );
+
+}
+
+
+/* =========================================================
+   UPDATE EVERYTHING
+========================================================= */
+
+function updateAll() {
+
+    updateSummary();
+
+    updatePreview();
+
+    renderGroupPreview();
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function resetAll() {
+
+    document.querySelectorAll(
+        '.table-option input'
+    ).forEach(
+        input => {
+            input.checked = false;
+        }
+    );
+
+
+    Object.keys(
+        selectedColumns
+    ).forEach(
+        key => {
+            delete selectedColumns[key];
+        }
+    );
+
+
+    Object.keys(
+        selectedDateFields
+    ).forEach(
+        key => {
+            delete selectedDateFields[key];
+        }
+    );
+
+
+    document.getElementById(
+        "period-all"
+    ).checked = true;
+
+
+    renderPeriodPanel();
+
+    renderDateFields();
+
+    renderColumns();
+
+    updateAll();
+
+}
+
+
+/* =========================================================
+   EXPORT
+========================================================= */
+
+function exportData() {
+
+    const config =
+        getExportConfiguration();
+
+
+    if (
+        !config.tables.length
+    ) {
+
+        alert(
+            "Pilih minimal satu tabel."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !config.columns.length
+    ) {
+
+        alert(
+            "Pilih minimal satu kolom."
+        );
+
+        return;
+
+    }
+
+
+    const period =
+        config.period;
+
+
+    if (
+        period.type !== "all" &&
+        period.type !== "range" &&
+        (!period.values ||
+         !period.values.length)
+    ) {
+
+        alert(
+            "Pilih minimal satu periode."
+        );
+
+        return;
+
+    }
+
+
+    console.log(
+        "EXPORT CONFIGURATION",
+        config
+    );
+
+
+    alert(
+        "Konfigurasi export berhasil dibuat.\n\n" +
+        "JSON lengkap tersedia di Console Browser."
+    );
+
+
+    /*
+    ============================================================
+    CONTOH INTEGRASI BACKEND
+    ============================================================
+
+    fetch('/api/export', {
+
+        method: 'POST',
+
+        headers: {
+            'Content-Type':
+                'application/json'
+        },
+
+        body:
+            JSON.stringify(config)
+
+    })
+    .then(response =>
+        response.blob()
+    )
+    .then(blob => {
+
+        const url =
+            URL.createObjectURL(blob);
+
+        const a =
+            document.createElement('a');
+
+        a.href = url;
+
+        a.download =
+            'export-data.xlsx';
+
+        a.click();
+
+        URL.revokeObjectURL(url);
+
+    });
+
+    */
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+renderPeriodPanel();
+
+renderDateFields();
+
+renderColumns();
+
+updateAll();
+
+</script>
+
+</body>
+</html>
