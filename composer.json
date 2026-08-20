@@ -7,8 +7,29 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "barryvdh/laravel-dompdf": "^3.1",
+        "bezhansalleh/filament-shield": "^4.3",
+        "filament/filament": "^5.7",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1"
+        "laravel/tinker": "^2.10.1",
+        "maennchen/zipstream-php": "^3.1",
+        "markbaker/complex": "^3.0",
+        "markbaker/matrix": "^3.0",
+        "openspout/openspout": "^4.28",
+        "phpoffice/phpspreadsheet": "^5.9",
+        "phpoffice/phpword": "^1.4",
+        "ramsey/uuid": "^4.9",
+        "spatie/laravel-activitylog": "^4.12",
+        "spatie/laravel-backup": "^9.3",
+        "spatie/laravel-html": "^3.13",
+        "spatie/laravel-ignition": "^2.12",
+        "spatie/laravel-image-optimizer": "^1.8",
+        "spatie/laravel-medialibrary": "^11.23",
+        "spatie/laravel-permission": "^6.25",
+        "spatie/laravel-query-builder": "^6.4",
+        "spatie/laravel-sluggable": "^3.8",
+        "spatie/laravel-tags": "^4.12",
+        "spatie/laravel-translatable": "^6.11"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -76,6 +97,7 @@
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,
+        "process-timeout": 0,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
