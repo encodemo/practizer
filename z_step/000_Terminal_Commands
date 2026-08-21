@@ -1,0 +1,8 @@
+## **Terminal Commands**
+
+```
+New-Item -Path "C:\xampp\htdocs\dirName\" -Name "dirName" -ItemType Directory
+Remove-Item -Recurse -Force "dirName"
+New-Item -Path "C:\xampp\htdocs\dirName\" -Name "filename.php" -ItemType File
+Remove-Item "fileName.ext"
+
