@@ -12,7 +12,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return view('users::index');
+        return view('users::roles.index');
     }
 
     /**
@@ -20,20 +20,23 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('users::create');
+        return view('users::roles.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {}
+    public function store(Request $request) 
+    {
+        return redirect()->route('users.roles.index')->with('success', 'Role successfully created (Simulation)!');
+    }
 
     /**
      * Show the specified resource.
      */
     public function show($id)
     {
-        return view('users::show');
+        return view('users::roles.edit');
     }
 
     /**
@@ -41,16 +44,22 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        return view('users::edit');
+        return view('users::roles.edit');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id) {}
+    public function update(Request $request, $id) 
+    {
+        return redirect()->route('users.roles.index')->with('success', 'Role successfully updated (Simulation)!');
+    }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id) {}
+    public function destroy($id) 
+    {
+        return redirect()->route('users.roles.index')->with('success', 'Role successfully deleted (Simulation)!');
+    }
 }

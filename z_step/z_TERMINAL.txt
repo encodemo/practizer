@@ -104,3 +104,29 @@ environment: xampp windows 10 x64, php 8.2.12
 3. module yang ada saat ini adalah admin, users & settings.
 4. rancang dengan gaya visual modern ala TALL-stack (Tailwind, Alpine, Laravel, Livewire) / FilamentPHP yang akan diimplementasikan pada mode production
 5. mohon periksa seluruh file .blade dalam dir root\modules untuk menjaga konsistensi atas seluruh pengembangan mockup template.
+6. untuk konfirmasi notification/alert mohon jangan menggunakan DOM windows, namun gunakan pop-up sebagai mana yang telah diteraokan pada semua file blade sebelumnya.
+
+
+
+
+terimakasih, semua fungsi mockup telah berjalan dengan sempurna. sebagai langkah akhir, anda sebagai professional software engineer & analytic, mohon buatkan sebuah file markdown dengan nama 008_RolePermission.md yang berisi tutorial & dokumentasi lengkap untuk pengguna maupun developer.
+
+
+terimakasih atas bantuannya yang sangat berharga.
+pembahasan sesi ini telah selesai.
+sesi diakhiri.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

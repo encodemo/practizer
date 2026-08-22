@@ -12,7 +12,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        return view('users::index');
+        return view('users::roles.index');
     }
 
     /**
@@ -20,20 +20,23 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('users::create');
+        return view('users::permissions.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {}
+    public function store(Request $request) 
+    {
+        return redirect()->route('users.roles.index')->with('success', 'Permission successfully created (Simulation)!');
+    }
 
     /**
      * Show the specified resource.
      */
     public function show($id)
     {
-        return view('users::show');
+        return view('users::permissions.edit');
     }
 
     /**
@@ -41,16 +44,22 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        return view('users::edit');
+        return view('users::permissions.edit');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id) {}
+    public function update(Request $request, $id) 
+    {
+        return redirect()->route('users.roles.index')->with('success', 'Permission successfully updated (Simulation)!');
+    }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id) {}
+    public function destroy($id) 
+    {
+        return redirect()->route('users.roles.index')->with('success', 'Permission successfully deleted (Simulation)!');
+    }
 }
