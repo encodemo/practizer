@@ -35,6 +35,8 @@ Route::prefix('admin/users')->name('users.')->group(function () {
 
     // 5. Activity Logs
     Route::get('/logs', [ActivityLogController::class, 'index'])->name('logs.index');
+    Route::post('/logs/purge', [ActivityLogController::class, 'purge'])->name('logs.purge');
     Route::get('/logs/{id}', [ActivityLogController::class, 'show'])->name('logs.show')->whereNumber('id');
+    Route::delete('/logs/{id}', [ActivityLogController::class, 'destroy'])->name('logs.destroy')->whereNumber('id');
 
 });
