@@ -222,50 +222,118 @@
         </div>
 
         <!-- ========================================================================= -->
-        <!-- 3. SECTION: 2 EQUAL COLUMNS (1 : 1) - MULTI-COLOR BARS VS DUAL LINES      -->
+        <!-- 3. SECTION: 3 EQUAL COLUMNS (1 : 1 : 1) - POLAR + DOUGHNUT + RADAR         -->
         <!-- ========================================================================= -->
         <div>
             <div class="flex items-center justify-between mb-3">
                 <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                    <span>Layout Variant 3: 2 Equal Columns (1 : 1 Grid)</span>
+                    <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+                    <span>Layout Variant 3: 3 Equal Columns (1 : 1 : 1 Symmetrical Grid)</span>
                 </h3>
-                <span class="text-[11px] text-gray-400 font-mono">grid-cols-1 lg:grid-cols-2</span>
+                <span class="text-[11px] text-gray-400 font-mono">grid-cols-1 md:grid-cols-3</span>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
-                <!-- Col 1: 12-Month Multi-Color Bar Chart (Distinct Bar Colors) -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
-                    <div class="flex items-center justify-between border-b border-gray-100 pb-3 mb-4">
-                        <div>
-                            <h3 class="text-base font-bold text-gray-900">Monthly Performance Spectrum</h3>
-                            <p class="text-xs text-gray-500 mt-0.5">Individual color-mapped bars across 12 calendar months.</p>
-                        </div>
-                        <span class="px-2 py-1 rounded-md text-xs font-mono font-bold bg-blue-50 text-primary border border-blue-200">
-                            12 Distinct Colors
-                        </span>
+                <!-- Col 1: Polar Area Chart (Category Share) -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col justify-between">
+                    <div class="border-b border-gray-100 pb-3 mb-4">
+                        <h3 class="text-base font-bold text-gray-900">Resource Allocation</h3>
+                        <p class="text-xs text-gray-500 mt-0.5">Polar area distribution across 5 core modules.</p>
                     </div>
 
-                    <div class="relative h-72 w-full">
-                        <canvas id="canvasVibrantBars"></canvas>
+                    <div class="relative h-64 w-full flex items-center justify-center">
+                        <canvas id="canvasPolar"></canvas>
                     </div>
                 </div>
 
-                <!-- Col 2: Smooth Dual-Line Comparative Growth -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
-                    <div class="flex items-center justify-between border-b border-gray-100 pb-3 mb-4">
-                        <div>
-                            <h3 class="text-base font-bold text-gray-900">Annual Growth Comparison</h3>
-                            <p class="text-xs text-gray-500 mt-0.5">Smooth bezier trajectory: FY 2025 (Actual) vs FY 2026 (Target).</p>
-                        </div>
-                        <span class="px-2 py-1 rounded-md text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                            +24.8% YoY
-                        </span>
+                <!-- Col 2: Multi-Segment Doughnut Chart (Traffic Channels) -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col justify-between">
+                    <div class="border-b border-gray-100 pb-3 mb-4">
+                        <h3 class="text-base font-bold text-gray-900">Inbound Acquisition</h3>
+                        <p class="text-xs text-gray-500 mt-0.5">Multi-channel traffic segmentation.</p>
                     </div>
 
-                    <div class="relative h-72 w-full">
-                        <canvas id="canvasDualLines"></canvas>
+                    <div class="relative h-64 w-full flex items-center justify-center">
+                        <canvas id="canvasDoughnut"></canvas>
+                    </div>
+                </div>
+
+                <!-- Col 3: Radar Chart (Platform Maturity Matrix) -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col justify-between">
+                    <div class="border-b border-gray-100 pb-3 mb-4">
+                        <h3 class="text-base font-bold text-gray-900">System Health Radar</h3>
+                        <p class="text-xs text-gray-500 mt-0.5">Security, Latency, Cache & Reliability index.</p>
+                    </div>
+
+                    <div class="relative h-64 w-full flex items-center justify-center">
+                        <canvas id="canvasRadar"></canvas>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- 4. SECTION: 4-COLUMN WIDTH (1 : 1 : 2) - UPTIME + CACHE + STACKED BARS     -->
+        <!-- ========================================================================= -->
+        <div>
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-teal-500"></span>
+                    <span>Layout Variant 4: 4-Column Width (1 : 1 : 2 Right-Weighted Span)</span>
+                </h3>
+                <span class="text-[11px] text-gray-400 font-mono">lg:col-span-1, lg:col-span-1, lg:col-span-2</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                
+                <!-- Col 1: Server Uptime Card -->
+                <div class="lg:col-span-1 bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">System Uptime</span>
+                            <span class="iconify text-xl text-emerald-600" data-icon="heroicons:server"></span>
+                        </div>
+                        <h4 class="text-2xl font-extrabold text-gray-900">99.99%</h4>
+                        <p class="text-xs text-gray-500 mt-1">Continuous runtime without incident over 120 days.</p>
+                    </div>
+
+                    <div class="pt-4 border-t border-gray-100 text-xs flex justify-between font-mono">
+                        <span class="text-gray-400">Last Reboot</span>
+                        <span class="text-gray-800 font-bold">120d 14h ago</span>
+                    </div>
+                </div>
+
+                <!-- Col 2: Cache Hit-Ratio Card -->
+                <div class="lg:col-span-1 bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Redis Cache Hit</span>
+                            <span class="iconify text-xl text-indigo-600" data-icon="heroicons:bolt"></span>
+                        </div>
+                        <h4 class="text-2xl font-extrabold text-gray-900">94.6%</h4>
+                        <p class="text-xs text-gray-500 mt-1">High cache resolution efficiency reducing DB load.</p>
+                    </div>
+
+                    <div class="pt-4 border-t border-gray-100 text-xs flex justify-between font-mono">
+                        <span class="text-gray-400">Cached Keys</span>
+                        <span class="text-gray-800 font-bold">14,280 items</span>
+                    </div>
+                </div>
+
+                <!-- Col 3 (Right 2): Stacked Grouped Bar Chart -->
+                <div class="lg:col-span-2 bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+                    <div class="flex items-center justify-between border-b border-gray-100 pb-3 mb-4">
+                        <div>
+                            <h3 class="text-base font-bold text-gray-900">Quarterly Expense Breakdown (Stacked)</h3>
+                            <p class="text-xs text-gray-500 mt-0.5">Stacked breakdown across Infrastructure, Operations & Support.</p>
+                        </div>
+                        <span class="px-2 py-0.5 bg-blue-50 text-primary border border-blue-200 rounded text-xs font-bold">Stacked View</span>
+                    </div>
+
+                    <div class="relative h-56 w-full">
+                        <canvas id="canvasStackedBars"></canvas>
                     </div>
                 </div>
 
@@ -351,6 +419,57 @@
                             <span class="font-bold">PHP 8.2 Engine</span>
                         </div>
                         <span class="font-mono font-semibold text-primary">OPcache Active</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- 3. SECTION: 2 EQUAL COLUMNS (1 : 1) - MULTI-COLOR BARS VS DUAL LINES      -->
+        <!-- ========================================================================= -->
+        <div>
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span>Layout Variant 3: 2 Equal Columns (1 : 1 Grid)</span>
+                </h3>
+                <span class="text-[11px] text-gray-400 font-mono">grid-cols-1 lg:grid-cols-2</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Col 1: 12-Month Multi-Color Bar Chart (Distinct Bar Colors) -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+                    <div class="flex items-center justify-between border-b border-gray-100 pb-3 mb-4">
+                        <div>
+                            <h3 class="text-base font-bold text-gray-900">Monthly Performance Spectrum</h3>
+                            <p class="text-xs text-gray-500 mt-0.5">Individual color-mapped bars across 12 calendar months.</p>
+                        </div>
+                        <span class="px-2 py-1 rounded-md text-xs font-mono font-bold bg-blue-50 text-primary border border-blue-200">
+                            12 Distinct Colors
+                        </span>
+                    </div>
+
+                    <div class="relative h-72 w-full">
+                        <canvas id="canvasVibrantBars"></canvas>
+                    </div>
+                </div>
+
+                <!-- Col 2: Smooth Dual-Line Comparative Growth -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+                    <div class="flex items-center justify-between border-b border-gray-100 pb-3 mb-4">
+                        <div>
+                            <h3 class="text-base font-bold text-gray-900">Annual Growth Comparison</h3>
+                            <p class="text-xs text-gray-500 mt-0.5">Smooth bezier trajectory: FY 2025 (Actual) vs FY 2026 (Target).</p>
+                        </div>
+                        <span class="px-2 py-1 rounded-md text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            +24.8% YoY
+                        </span>
+                    </div>
+
+                    <div class="relative h-72 w-full">
+                        <canvas id="canvasDualLines"></canvas>
                     </div>
                 </div>
 
@@ -522,59 +641,6 @@
         </div>
 
         <!-- ========================================================================= -->
-        <!-- 6. SECTION: 3 EQUAL COLUMNS (1 : 1 : 1) - POLAR + DOUGHNUT + RADAR         -->
-        <!-- ========================================================================= -->
-        <div>
-            <div class="flex items-center justify-between mb-3">
-                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-rose-500"></span>
-                    <span>Layout Variant 6: 3 Equal Columns (1 : 1 : 1 Symmetrical Grid)</span>
-                </h3>
-                <span class="text-[11px] text-gray-400 font-mono">grid-cols-1 md:grid-cols-3</span>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
-                <!-- Col 1: Polar Area Chart (Category Share) -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col justify-between">
-                    <div class="border-b border-gray-100 pb-3 mb-4">
-                        <h3 class="text-base font-bold text-gray-900">Resource Allocation</h3>
-                        <p class="text-xs text-gray-500 mt-0.5">Polar area distribution across 5 core modules.</p>
-                    </div>
-
-                    <div class="relative h-64 w-full flex items-center justify-center">
-                        <canvas id="canvasPolar"></canvas>
-                    </div>
-                </div>
-
-                <!-- Col 2: Multi-Segment Doughnut Chart (Traffic Channels) -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col justify-between">
-                    <div class="border-b border-gray-100 pb-3 mb-4">
-                        <h3 class="text-base font-bold text-gray-900">Inbound Acquisition</h3>
-                        <p class="text-xs text-gray-500 mt-0.5">Multi-channel traffic segmentation.</p>
-                    </div>
-
-                    <div class="relative h-64 w-full flex items-center justify-center">
-                        <canvas id="canvasDoughnut"></canvas>
-                    </div>
-                </div>
-
-                <!-- Col 3: Radar Chart (Platform Maturity Matrix) -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col justify-between">
-                    <div class="border-b border-gray-100 pb-3 mb-4">
-                        <h3 class="text-base font-bold text-gray-900">System Health Radar</h3>
-                        <p class="text-xs text-gray-500 mt-0.5">Security, Latency, Cache & Reliability index.</p>
-                    </div>
-
-                    <div class="relative h-64 w-full flex items-center justify-center">
-                        <canvas id="canvasRadar"></canvas>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- ========================================================================= -->
         <!-- 7. SECTION: 4-COLUMN WIDTH (1 : 2 : 1) - QUICK TOOLS + BARS + TARGET RING -->
         <!-- ========================================================================= -->
         <div>
@@ -657,72 +723,6 @@
                     </div>
                     
                     <span class="text-xs text-emerald-600 font-bold mt-3">$98k of $125k Goal</span>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- ========================================================================= -->
-        <!-- 8. SECTION: 4-COLUMN WIDTH (1 : 1 : 2) - UPTIME + CACHE + STACKED BARS     -->
-        <!-- ========================================================================= -->
-        <div>
-            <div class="flex items-center justify-between mb-3">
-                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-teal-500"></span>
-                    <span>Layout Variant 8: 4-Column Width (1 : 1 : 2 Right-Weighted Span)</span>
-                </h3>
-                <span class="text-[11px] text-gray-400 font-mono">lg:col-span-1, lg:col-span-1, lg:col-span-2</span>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-                
-                <!-- Col 1: Server Uptime Card -->
-                <div class="lg:col-span-1 bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">System Uptime</span>
-                            <span class="iconify text-xl text-emerald-600" data-icon="heroicons:server"></span>
-                        </div>
-                        <h4 class="text-2xl font-extrabold text-gray-900">99.99%</h4>
-                        <p class="text-xs text-gray-500 mt-1">Continuous runtime without incident over 120 days.</p>
-                    </div>
-
-                    <div class="pt-4 border-t border-gray-100 text-xs flex justify-between font-mono">
-                        <span class="text-gray-400">Last Reboot</span>
-                        <span class="text-gray-800 font-bold">120d 14h ago</span>
-                    </div>
-                </div>
-
-                <!-- Col 2: Cache Hit-Ratio Card -->
-                <div class="lg:col-span-1 bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Redis Cache Hit</span>
-                            <span class="iconify text-xl text-indigo-600" data-icon="heroicons:bolt"></span>
-                        </div>
-                        <h4 class="text-2xl font-extrabold text-gray-900">94.6%</h4>
-                        <p class="text-xs text-gray-500 mt-1">High cache resolution efficiency reducing DB load.</p>
-                    </div>
-
-                    <div class="pt-4 border-t border-gray-100 text-xs flex justify-between font-mono">
-                        <span class="text-gray-400">Cached Keys</span>
-                        <span class="text-gray-800 font-bold">14,280 items</span>
-                    </div>
-                </div>
-
-                <!-- Col 3 (Right 2): Stacked Grouped Bar Chart -->
-                <div class="lg:col-span-2 bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
-                    <div class="flex items-center justify-between border-b border-gray-100 pb-3 mb-4">
-                        <div>
-                            <h3 class="text-base font-bold text-gray-900">Quarterly Expense Breakdown (Stacked)</h3>
-                            <p class="text-xs text-gray-500 mt-0.5">Stacked breakdown across Infrastructure, Operations & Support.</p>
-                        </div>
-                        <span class="px-2 py-0.5 bg-blue-50 text-primary border border-blue-200 rounded text-xs font-bold">Stacked View</span>
-                    </div>
-
-                    <div class="relative h-56 w-full">
-                        <canvas id="canvasStackedBars"></canvas>
-                    </div>
                 </div>
 
             </div>
