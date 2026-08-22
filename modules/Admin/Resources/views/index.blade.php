@@ -341,13 +341,13 @@
         </div>
 
         <!-- ========================================================================= -->
-        <!-- 4. SECTION: 3-COLUMN WIDTH (2 : 1) - COMBO BAR-LINE + SYSTEM GAUGES       -->
+        <!-- 5. SECTION: 3-COLUMN WIDTH (2 : 1) - COMBO BAR-LINE + SYSTEM GAUGES       -->
         <!-- ========================================================================= -->
         <div>
             <div class="flex items-center justify-between mb-3">
                 <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-purple-500"></span>
-                    <span>Layout Variant 4: 3-Column Width (2 : 1 Asymmetric Layout)</span>
+                    <span>Layout Variant 5: 3-Column Width (2 : 1 Asymmetric Layout)</span>
                 </h3>
                 <span class="text-[11px] text-gray-400 font-mono">lg:col-span-2 & lg:col-span-1</span>
             </div>
@@ -426,13 +426,13 @@
         </div>
 
         <!-- ========================================================================= -->
-        <!-- 3. SECTION: 2 EQUAL COLUMNS (1 : 1) - MULTI-COLOR BARS VS DUAL LINES      -->
+        <!-- 6. SECTION: 2 EQUAL COLUMNS (1 : 1) - MULTI-COLOR BARS VS DUAL LINES      -->
         <!-- ========================================================================= -->
         <div>
             <div class="flex items-center justify-between mb-3">
                 <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                    <span>Layout Variant 3: 2 Equal Columns (1 : 1 Grid)</span>
+                    <span>Layout Variant 6: 2 Equal Columns (1 : 1 Grid)</span>
                 </h3>
                 <span class="text-[11px] text-gray-400 font-mono">grid-cols-1 lg:grid-cols-2</span>
             </div>
@@ -477,13 +477,13 @@
         </div>
 
         <!-- ========================================================================= -->
-        <!-- 5. SECTION: 3-COLUMN WIDTH (1 : 2) - ACTIVITY FEED + MINI DATA TABLE      -->
+        <!-- 7. SECTION: 3-COLUMN WIDTH (1 : 2) - ACTIVITY FEED + MINI DATA TABLE      -->
         <!-- ========================================================================= -->
         <div>
             <div class="flex items-center justify-between mb-3">
                 <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-                    <span>Layout Variant 5: 3-Column Width (1 : 2 Inverted Layout)</span>
+                    <span>Layout Variant 7: 3-Column Width (1 : 2 Inverted Layout)</span>
                 </h3>
                 <span class="text-[11px] text-gray-400 font-mono">lg:col-span-1 & lg:col-span-2</span>
             </div>
@@ -641,13 +641,13 @@
         </div>
 
         <!-- ========================================================================= -->
-        <!-- 7. SECTION: 4-COLUMN WIDTH (1 : 2 : 1) - QUICK TOOLS + BARS + TARGET RING -->
+        <!-- 8. SECTION: 4-COLUMN WIDTH (1 : 2 : 1) - QUICK TOOLS + BARS + TARGET RING -->
         <!-- ========================================================================= -->
         <div>
             <div class="flex items-center justify-between mb-3">
                 <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-cyan-500"></span>
-                    <span>Layout Variant 7: 4-Column Width (1 : 2 : 1 Symmetric Center)</span>
+                    <span>Layout Variant 8: 4-Column Width (1 : 2 : 1 Symmetric Center)</span>
                 </h3>
                 <span class="text-[11px] text-gray-400 font-mono">lg:col-span-1, lg:col-span-2, lg:col-span-1</span>
             </div>
