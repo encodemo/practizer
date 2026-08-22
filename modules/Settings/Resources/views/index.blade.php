@@ -1,5 +1,2 @@
-<x-settings::layouts.master>
-    <h1>Hello World</h1>
+@include('settings::general')
 
-    <p>Module: {!! config('settings.name') !!}</p>
-</x-settings::layouts.master>

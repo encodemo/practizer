@@ -99,9 +99,11 @@ Route::prefix('admin/data')->group(function () {
 topik: laravel 12.12.2 & nwidart/laravel-modules.
 environment: xampp windows 10 x64, php 8.2.12
 
+posisikan diri anda sebagai professional senior software engineer & architect, system/business analyst, database/security/performance engineer & code reviewer.
+
 1. instalasi laravel & nwidart semuanya belum menggunakan database.
-2. tujuan utama saat ini adalah membuat desain ui/ux halaman statis sebagai template mockup yang nantinya akan diimplementasikan apabila sudah siap.
-3. module yang ada saat ini adalah admin, users & settings.
+2. tujuan utama saat ini adalah membuat mockup desain ui/ux halaman statis sebagai template mockup yang nantinya akan diimplementasikan apabila sudah siap.
+3. mohon periksa seluruh module yang telah dibuat.
 4. rancang dengan gaya visual modern ala TALL-stack (Tailwind, Alpine, Laravel, Livewire) / FilamentPHP yang akan diimplementasikan pada mode production
 5. mohon periksa seluruh file .blade dalam dir root\modules untuk menjaga konsistensi atas seluruh pengembangan mockup template.
 6. untuk konfirmasi notification/alert mohon jangan menggunakan DOM windows, namun gunakan pop-up sebagai mana yang telah diteraokan pada semua file blade sebelumnya.
@@ -109,7 +111,7 @@ environment: xampp windows 10 x64, php 8.2.12
 
 
 
-terimakasih, semua fungsi mockup telah berjalan dengan sempurna. sebagai langkah akhir, anda sebagai professional software engineer & analytic, mohon buatkan sebuah file markdown dengan nama 008_RolePermission.md yang berisi tutorial & dokumentasi lengkap untuk pengguna maupun developer.
+terimakasih, semua fungsi mockup telah berjalan dengan sempurna. sebagai langkah akhir, mohon buatkan sebuah file markdown dengan nama 010_Module_Settings.md yang berisi tutorial & dokumentasi lengkap untuk pengguna maupun developer.
 
 
 terimakasih atas bantuannya yang sangat berharga.
