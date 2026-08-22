@@ -103,3 +103,4 @@ environment: xampp windows 10 x64, php 8.2.12
 2. tujuan utama saat ini adalah membuat desain ui/ux halaman statis sebagai template mockup yang nantinya akan diimplementasikan apabila sudah siap.
 3. module yang ada saat ini adalah admin, users & settings.
 4. rancang dengan gaya visual modern ala TALL-stack (Tailwind, Alpine, Laravel, Livewire) / FilamentPHP yang akan diimplementasikan pada mode production
+5. mohon periksa seluruh file .blade dalam dir root\modules untuk menjaga konsistensi atas seluruh pengembangan mockup template.
