@@ -93,3 +93,13 @@ Route::prefix('admin/data')->group(function () {
     Route::get('/import', [DataController::class, 'showImportForm'])->name('data.import.show');
     Route::get('/export', [DataController::class, 'showExportOptions'])->name('data.export.show');
 });
+
+
+
+topik: laravel 12.12.2 & nwidart/laravel-modules.
+environment: xampp windows 10 x64, php 8.2.12
+
+1. instalasi laravel & nwidart semuanya belum menggunakan database.
+2. tujuan utama saat ini adalah membuat desain ui/ux halaman statis sebagai template mockup yang nantinya akan diimplementasikan apabila sudah siap.
+3. module yang ada saat ini adalah admin, users & settings.
+4. rancang dengan gaya visual modern ala TALL-stack (Tailwind, Alpine, Laravel, Livewire) / FilamentPHP yang akan diimplementasikan pada mode production

@@ -30,19 +30,26 @@
             <div id="users-menu" class="grid transition-all duration-300 ease-in-out grid-rows-[1fr] opacity-100">
                 <div class="overflow-hidden">
                     <div class="space-y-1 mt-1">
-                        <a href="#" class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 rounded-lg transition-colors">
+                        <!-- All Users -->
+                        <a href="{{ route('users.index') }}" class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 rounded-lg transition-colors">
                             <span class="iconify text-xl" data-icon="heroicons:users"></span>
                             <span class="font-medium text-sm">All Users</span>
                         </a>
-                        <a href="#" class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 rounded-lg transition-colors">
+                        
+                        <!-- User Groups -->
+                        <a href="{{ route('users.groups.index') }}" class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 rounded-lg transition-colors">
                             <span class="iconify text-xl" data-icon="heroicons:user-group"></span>
                             <span class="font-medium text-sm">User Groups</span>
                         </a>
-                        <a href="#" class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 rounded-lg transition-colors">
+                        
+                        <!-- Roles & Permissions -->
+                        <a href="{{ route('users.roles.index') }}" class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 rounded-lg transition-colors">
                             <span class="iconify text-xl" data-icon="heroicons:shield-check"></span>
                             <span class="font-medium text-sm">Roles & Permissions</span>
                         </a>
-                        <a href="#" class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 rounded-lg transition-colors">
+                        
+                        <!-- Activity Logs -->
+                        <a href="{{ route('users.logs.index') }}" class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 rounded-lg transition-colors">
                             <span class="iconify text-xl" data-icon="heroicons:clipboard-document-list"></span>
                             <span class="font-medium text-sm">Activity Logs</span>
                         </a>

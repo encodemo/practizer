@@ -14,11 +14,21 @@
     <!-- External Tailwind Config -->
     <script src="{{ asset('modules/admin/js/tailwind-config.js') }}"></script>
     
+    <!-- Alpine.js CDN (TALL-Stack Core for Modals, Dropdowns & Reactive UI) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <!-- Iconify CDN (untuk Heroicons) -->
     <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+    <!-- Global CSS Helper for Alpine Cloak -->
+    <style>
+        [x-cloak] { 
+            display: none !important; 
+        }
+    </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans flex h-screen overflow-hidden">
 
@@ -37,7 +47,7 @@
         </main>
 
         <!-- INCLUDE FOOTER -->
-        @include('admin::components.layouts.partials.footer')
+        <!-- @include('admin::components.layouts.partials.footer') -->
         
     </div>
 

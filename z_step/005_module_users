@@ -1,0 +1,67 @@
+## **Create User Module**
+
+Buka file  ```root\Modules\User\routes\web.php```
+
+```php
+<?php
+
+use Illuminate\Support\Facades\Route;
+use Modules\Users\Http\Controllers\UsersController;
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::resource('users', UsersController::class)->names('users');
+});
+
+```
+Ubah menjadi:
+```php
+<?php
+
+use Illuminate\Support\Facades\Route;
+use Modules\Users\Http\Controllers\UsersController;
+
+Route::prefix('admin/users')->group(function () {
+    Route::get('/', [UsersController::class, 'index'])->name('users.index');
+    Route::get('/create', [UsersController::class, 'create'])->name('users.create');
+    Route::post('/', [UsersController::class, 'store'])->name('users.store');
+    Route::get('/{id}', [UsersController::class, 'show'])->name('users.show');
+    Route::get('/{id}/edit', [UsersController::class, 'edit'])->name('users.edit');
+    Route::put('/{id}', [UsersController::class, 'update'])->name('users.update');
+    Route::delete('/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
+
+    // User Groups
+    Route::get('/groups', [UsersController::class, 'groups'])->name('users.groups');
+
+    // Peran & Hak Akses (RBAC)
+    Route::get('/roles', [UsersController::class, 'roles'])->name('users.roles');
+
+    // Permission
+    Route::get('/permit', [UsersController::class, 'permit'])->name('users.permit');
+
+    // Activity Logs
+    Route::get('/userlogs', [UsersController::class, 'userlogs'])->name('users.userlogs');
+});
+
+```
+Lakukan pengujian dengan membuka url ```http://localhost/practizer/public/admin/users```.
+Apabila semua pengaturan berhasil, maka browser akan menampilkan halaman ```Hello World``` dengan keterangan di bawahnya ```Module: Users```
+
+##
+
+buat controller baru:
+php artisan module:make-controller UserGroupController Users
+php artisan module:make-controller RoleController Users
+php artisan module:make-controller PermissionController Users
+php artisan module:make-controller ActivityLogController Users
+
+PS C:\xampp\htdocs\practizer> php artisan module:make-controller UserGroupController Users
+  Generating file C:/xampp/htdocs/practizer/Modules/Users/Http/Controllers/UserGroupController.php ..................................... 2.01ms DONE
+PS C:\xampp\htdocs\practizer> php artisan module:make-controller RoleController Users
+  Generating file C:/xampp/htdocs/practizer/Modules/Users/Http/Controllers/RoleController.php .......................................... 1.53ms DONE
+PS C:\xampp\htdocs\practizer> php artisan module:make-controller PermissionController Users
+  Generating file C:/xampp/htdocs/practizer/Modules/Users/Http/Controllers/PermissionController.php .................................... 1.48ms DONE
+PS C:\xampp\htdocs\practizer> php artisan module:make-controller ActivityLogController Users
+  Generating file C:/xampp/htdocs/practizer/Modules/Users/Http/Controllers/ActivityLogController.php ................................... 1.88ms DONE
+
+
+
