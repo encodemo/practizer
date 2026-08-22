@@ -1,5 +1,13 @@
 ## **Create Module**
 
+root/modules/
+├── Admin
+├── Settings
+├── Users
+│
+└── ...
+
+
 ```bash
 https://nwidart.com/laravel-modules/v6/basic-usage/creating-a-module
 ```

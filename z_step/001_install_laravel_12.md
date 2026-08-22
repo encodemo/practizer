@@ -1,6 +1,6 @@
 # **Install Laravel 12.12.2**
 
-```cpp
+```bash
 composer create-project --prefer-dist laravel/laravel:12.12.2 practizer
 
 Creating a "laravel/laravel:12.12.2" project at "./base-12122"

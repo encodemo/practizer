@@ -1,0 +1,43 @@
+## **Create Admin Module**
+
+Buka file  ```root\Modules\Admin\routes\web.php```
+
+```php
+<?php
+
+use Illuminate\Support\Facades\Route;
+use Modules\Admin\Http\Controllers\AdminController;
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::resource('admins', AdminController::class)->names('admin');
+});
+
+```
+Ubah menjadi:
+```php
+<?php
+
+use Illuminate\Support\Facades\Route;
+use Modules\Admin\Http\Controllers\AdminController;
+
+Route::prefix('admin')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+});
+
+```
+##
+
+Buka browser, lakukan pengujian dengan membuka url.
+
+```php
+http://localhost/practizer/public/admin
+```
+
+```php
+http://localhost/practizer/public/admin/dashboard
+```
+
+Apabila semua pengaturan berhasil, maka browser akan menampilkan halaman `Hello World` dengan keterangan di bawahnya `Module: Admin`
+
+##
